@@ -5,6 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     PlayerControls playerControls;
+    PlayerController playerController;
     AnimatorManager animManager;
 
     [SerializeField]
@@ -16,13 +17,17 @@ public class InputManager : MonoBehaviour
     public float cameraInputX;
     public float cameraInputY;
 
-    float moveAmount;
+    public float moveAmount;
     public float verticalInput;
     public float horizontalInput;
+
+    public bool shiftInput;
+    public bool ctrlInput;
 
     private void Awake()
     {
         animManager = GetComponent<AnimatorManager>();
+        playerController = GetComponent<PlayerController>();
     }
 
     private void OnEnable()
@@ -33,6 +38,12 @@ public class InputManager : MonoBehaviour
 
             playerControls.Player.Move.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.Player.Look.performed += i => cameraInput = i.ReadValue<Vector2>();
+
+            playerControls.Player.Sprint.performed += i => shiftInput = true;
+            playerControls.Player.Sprint.canceled += i => shiftInput = false;
+
+            playerControls.Player.Walk.performed += i => ctrlInput = true;
+            playerControls.Player.Walk.canceled += i => ctrlInput = false;
         }
 
         playerControls.Enable();
@@ -56,8 +67,34 @@ public class InputManager : MonoBehaviour
         animManager.UpdateAnimValues(0, moveAmount);
     }
 
+    private void HandleSprintingInput()
+    {
+        if(shiftInput)
+        {
+            playerController.isSprinting = true;
+        } 
+        else
+        {
+            playerController.isSprinting = false;
+        }
+    }
+
+    private void HandleWalkingInput()
+    {
+        if (shiftInput)
+        {
+            playerController.isWalking = true;
+        }
+        else
+        {
+            playerController.isWalking = false;
+        }
+    }
+
     public void HandleAllInputs()
     {
         HandleMovementInput();
+        HandleSprintingInput();
+        HandleWalkingInput();
     }
 }

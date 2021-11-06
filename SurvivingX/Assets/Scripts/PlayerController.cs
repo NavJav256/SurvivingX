@@ -12,7 +12,13 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
 
-    float moveSpeed = 7;
+    public bool isSprinting;
+    public bool isWalking;
+
+    [Header("Movement Speeds")]
+    float walkingSpeed = 1.5f;
+    float runningSpeed = 5;
+    float sprintingSpeed = 7.5f;
     float rotationSpeed = 15;
 
     private void Awake()
@@ -27,7 +33,22 @@ public class PlayerController : MonoBehaviour
         moveDirection += cameraObject.right * inputManager.horizontalInput;
         moveDirection.Normalize();
         moveDirection.y = 0;
-        moveDirection *= moveSpeed;
+
+        //moveDirection *= isSprinting ? sprintingSpeed : isWalking ? walkingSpeed : runningSpeed;
+        
+        if(isSprinting)
+        {
+            moveDirection *= sprintingSpeed;
+        }
+        else if (isWalking)
+        {
+            moveDirection *= walkingSpeed;
+        }
+        else
+        {
+            moveDirection *= runningSpeed;
+        }
+        
 
         Vector3 moveVelocity = moveDirection;
         rb.velocity = moveVelocity;
