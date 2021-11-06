@@ -9,6 +9,13 @@ public class InputManager : MonoBehaviour
 
     [SerializeField]
     Vector2 movementInput;
+
+    [SerializeField]
+    Vector2 cameraInput;
+
+    public float cameraInputX;
+    public float cameraInputY;
+
     float moveAmount;
     public float verticalInput;
     public float horizontalInput;
@@ -25,6 +32,7 @@ public class InputManager : MonoBehaviour
             playerControls = new PlayerControls();
 
             playerControls.Player.Move.performed += i => movementInput = i.ReadValue<Vector2>();
+            playerControls.Player.Look.performed += i => cameraInput = i.ReadValue<Vector2>();
         }
 
         playerControls.Enable();
@@ -40,6 +48,10 @@ public class InputManager : MonoBehaviour
     {
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
+
+        cameraInputY = cameraInput.y;
+        cameraInputX = cameraInput.x;
+
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
         animManager.UpdateAnimValues(0, moveAmount);
     }
