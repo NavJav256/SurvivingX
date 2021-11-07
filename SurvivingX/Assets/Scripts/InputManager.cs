@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
 
     public bool shiftInput;
     public bool ctrlInput;
+    public bool spaceInput;
 
     private void Awake()
     {
@@ -44,6 +45,8 @@ public class InputManager : MonoBehaviour
 
             playerControls.Player.Walk.performed += i => ctrlInput = true;
             playerControls.Player.Walk.canceled += i => ctrlInput = false;
+
+            playerControls.Player.Jump.performed += i => spaceInput = true;
         }
 
         playerControls.Enable();
@@ -53,6 +56,15 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Disable();
+    }
+
+    private void HandleJumpInput()
+    {
+        if(spaceInput)
+        {
+            spaceInput = false;
+            playerController.HandleJump();
+        }
     }
 
     private void HandleMovementInput()
@@ -96,5 +108,6 @@ public class InputManager : MonoBehaviour
         HandleMovementInput();
         HandleSprintingInput();
         HandleWalkingInput();
+        HandleJumpInput();
     }
 }

@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public bool isSprinting;
     public bool isWalking;
     public bool isGrounded;
+    public bool isJumping;
 
     [Header("Movement Speeds")]
     [SerializeField]
@@ -105,6 +106,11 @@ public class PlayerController : MonoBehaviour
                 isGrounded = false;
             }
         }
+    }
+
+    public void HandleJump()
+    {
+
     }
 
     public void HandleAllMovement()
