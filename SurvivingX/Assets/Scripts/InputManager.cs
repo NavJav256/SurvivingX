@@ -64,7 +64,7 @@ public class InputManager : MonoBehaviour
         cameraInputX = cameraInput.x;
 
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
-        animManager.UpdateAnimValues(0, moveAmount);
+        animManager.UpdateAnimValues(0, moveAmount, playerController.isSprinting, playerController.isWalking);
     }
 
     private void HandleSprintingInput()
@@ -81,7 +81,7 @@ public class InputManager : MonoBehaviour
 
     private void HandleWalkingInput()
     {
-        if (shiftInput)
+        if (ctrlInput)
         {
             playerController.isWalking = true;
         }

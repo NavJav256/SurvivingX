@@ -37,13 +37,11 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.y < 0)
             rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
 
-        //moveDirection *= isSprinting ? sprintingSpeed : isWalking ? walkingSpeed : runningSpeed;
-
         if (isSprinting)
         {
             moveDirection *= sprintingSpeed;
         }
-        if (isWalking)
+        else if (isWalking)
         {
             moveDirection *= walkingSpeed;
         }
