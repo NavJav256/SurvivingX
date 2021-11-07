@@ -151,7 +151,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""38eaff40-1947-41ce-a069-7965b05a17cc"",
-                    ""path"": ""<Keyboard>/v"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

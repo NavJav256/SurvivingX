@@ -21,7 +21,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField]
     float cameraFollowSpeed = 0.2f;
     [SerializeField]
-    float cameraLookSpeed = 0.1f;
+    float cameraLookSpeed = 0.35f;
     [SerializeField]
     float cameraPivotSpeed = 0.1f;
     [SerializeField]

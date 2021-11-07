@@ -16,9 +16,9 @@ public class PlayerController : MonoBehaviour
     public bool isWalking;
 
     [Header("Movement Speeds")]
-    float walkingSpeed = 1.5f;
-    float runningSpeed = 5;
-    float sprintingSpeed = 7.5f;
+    float walkingSpeed = 4;
+    float runningSpeed = 7;
+    float sprintingSpeed = 10;
     float rotationSpeed = 15;
 
     private void Awake()
@@ -34,13 +34,16 @@ public class PlayerController : MonoBehaviour
         moveDirection.Normalize();
         moveDirection.y = 0;
 
+        if (rb.velocity.y < 0)
+            rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
+
         //moveDirection *= isSprinting ? sprintingSpeed : isWalking ? walkingSpeed : runningSpeed;
-        
-        if(isSprinting)
+
+        if (isSprinting)
         {
             moveDirection *= sprintingSpeed;
         }
-        else if (isWalking)
+        if (isWalking)
         {
             moveDirection *= walkingSpeed;
         }
