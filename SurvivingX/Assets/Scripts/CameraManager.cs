@@ -90,7 +90,7 @@ public class CameraManager : MonoBehaviour
             (cameraPivot.transform.position, cameraCollisionRadius, direction, out hit, Mathf.Abs(targetPosition), collisionLayers))
         {
             float distance = Vector3.Distance(cameraPivot.position, hit.point);
-            targetPosition -= distance - cameraCollisionOffset;
+            targetPosition -= (distance + cameraCollisionOffset);
         }
 
         if(Mathf.Abs(targetPosition) < minCollisionOffset)

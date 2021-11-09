@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    PlayerManager playerManager;
     InputManager inputManager;
+    AnimatorManager animManager;
 
     Vector3 moveDirection;
     Transform cameraObject;
@@ -36,7 +37,9 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        playerManager = GetComponent<PlayerManager>();
         inputManager = GetComponent<InputManager>();
+        animManager = GetComponent<AnimatorManager>();
         rb = GetComponent<Rigidbody>();
         cameraObject = Camera.main.transform;
     }
@@ -89,33 +92,36 @@ public class PlayerController : MonoBehaviour
 
         if(!isGrounded)
         {
+            if (!playerManager.isInteracting) animManager.PlayTargetAnimation("Sprint", true);
             inAirTimer += Time.deltaTime;
-            //rb.AddForce(transform.forward * leapingVelocity);
-            rb.AddForce(Vector3.down * fallingSpeed * 2500 * inAirTimer);
+            rb.AddForce(transform.forward * leapingVelocity);
+            rb.AddForce(Vector3.down * fallingSpeed * 1000 * inAirTimer);
         }
 
-        if(Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, 0.1f, groundLayer))
+        if(Physics.SphereCast(rayCastOrigin, 0.2f, Vector3.down, out hit, 0.1f, groundLayer))
         {
-            if(!isGrounded)
-            {
-                inAirTimer = 0;
-                isGrounded = true;
-            }
-            else
-            {
-                isGrounded = false;
-            }
+            if (!isGrounded && playerManager.isInteracting) animManager.PlayTargetAnimation("Walk", true);
+            inAirTimer = 0;
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
         }
     }
 
     public void HandleJump()
     {
-
+        if(isGrounded)
+        {
+            animManager.animator.SetBool("isJumping", true);
+        }
     }
 
     public void HandleAllMovement()
     {
         HandleFallingAndLanding();
+        //if (playerManager.isInteracting) return;
         HandleMovement();
         HandleRotation();
     }
