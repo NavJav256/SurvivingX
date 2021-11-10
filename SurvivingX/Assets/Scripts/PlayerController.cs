@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
         if(!isGrounded)
         {
-            if (!playerManager.isInteracting) animManager.PlayTargetAnimation("Sprint", true);
+            if (!playerManager.isInteracting) animManager.PlayTargetAnimation("Falling Idle", true);
             inAirTimer += Time.deltaTime;
             rb.AddForce(transform.forward * leapingVelocity);
             rb.AddForce(Vector3.down * fallingSpeed * 1000 * inAirTimer);
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
         if(Physics.SphereCast(rayCastOrigin, 0.2f, Vector3.down, out hit, 0.1f, groundLayer))
         {
-            if (!isGrounded && playerManager.isInteracting) animManager.PlayTargetAnimation("Walk", true);
+            if (!isGrounded && playerManager.isInteracting) animManager.PlayTargetAnimation("Falling To Landing", true);
             inAirTimer = 0;
             isGrounded = true;
         }
