@@ -31,11 +31,11 @@ public class Enemy : MonoBehaviour
             if (distance <= agent.stoppingDistance)
             {
                 faceTarget();
-                // Deal damage to the player if within damage radius of 3
-                if (distance <= damageRadius)
-                {
-                    Debug.Log("I am dealing damage");
-                }
+            }
+            // Deal damage to the player if within damage radius of 3
+            if (distance <= damageRadius)
+            {
+                Debug.Log("I am dealing damage");
             }
         }
 
@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
     {
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2f);
     }
 
     // Change random direction
