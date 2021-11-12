@@ -24,19 +24,41 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField]
     HealthBar healthBar;
+    [SerializeField]
+    HungerBar hungerBar;
+    [SerializeField]
+    StaminaBar staminaBar;
 
     public bool takingDamage = false;
     float attackSpeed = 1.5f;
     float attackTimer;
+    float hungerTimer;
+    float hungerRate = 3.5f;
 
     private void Start()
     {
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
+        currentHunger = maxHunger;
+        hungerBar.setMaxHunger(maxHunger);
+        currentStamina = maxStamina;
+        staminaBar.setMaxStamina(maxStamina);
     }
 
     private void Update()
     {
+        if(hungerTimer >= hungerRate && currentHunger != 0)
+        {
+            if(currentHunger == 0)
+            {
+                TakeDamage(4);
+            } else
+            {
+                GetHungry(5);
+            }
+            hungerTimer = 0;
+        }
+        hungerTimer += Time.deltaTime;
         if(takingDamage)
         {
             if(attackTimer >= attackSpeed)
@@ -56,5 +78,11 @@ public class PlayerStats : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.setHealth(currentHealth);
+    }
+
+    private void GetHungry(int hunger)
+    {
+        currentHunger -= hunger;
+        hungerBar.setHunger(currentHunger);
     }
 }
