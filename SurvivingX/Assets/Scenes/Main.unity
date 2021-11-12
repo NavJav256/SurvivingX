@@ -10601,8 +10601,8 @@ MonoBehaviour:
   currentStamina: 0
   ringCount: 0
   healthBar: {fileID: 1827271765}
-  hungerBar: {fileID: 0}
-  staminaBar: {fileID: 0}
+  hungerBar: {fileID: 332663648}
+  staminaBar: {fileID: 432212354}
   takingDamage: 0
 --- !u!4 &1208818462 stripped
 Transform:

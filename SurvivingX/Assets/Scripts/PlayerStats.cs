@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerStats : MonoBehaviour
 {
 
+    PlayerController playerController;
+
     [Header("Variables")]
     [SerializeField]
     int maxHealth = 100;
@@ -22,6 +24,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     int ringCount;
 
+    [Header("Bars")]
     [SerializeField]
     HealthBar healthBar;
     [SerializeField]
@@ -32,11 +35,15 @@ public class PlayerStats : MonoBehaviour
     public bool takingDamage = false;
     float attackSpeed = 1.5f;
     float attackTimer;
-    float hungerTimer;
     float hungerRate = 3.5f;
+    float hungerTimer;
+    float staminaTiredRate = 0.5f;
+    float staminaRechargeRate = 0.2f;
+    float staminaTimer;
 
     private void Start()
     {
+        playerController = GetComponent<PlayerController>();
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
         currentHunger = maxHunger;
@@ -47,7 +54,23 @@ public class PlayerStats : MonoBehaviour
 
     private void Update()
     {
-        if(hungerTimer >= hungerRate && currentHunger != 0)
+        if(playerController.isSprinting)
+        {
+            if(currentStamina <= 0)
+            {
+                playerController.isSprinting = false;
+            }
+            GetTired(3);
+        }
+        else
+        {
+            if(currentStamina >= maxStamina)
+            {
+                currentStamina = maxStamina;
+            }
+            rechargeStamina();
+        }
+        if(hungerTimer >= hungerRate)
         {
             if(currentHunger == 0)
             {
@@ -83,6 +106,28 @@ public class PlayerStats : MonoBehaviour
     private void GetHungry(int hunger)
     {
         currentHunger -= hunger;
-        //hungerBar.setHunger(currentHunger);
+        hungerBar.setHunger(currentHunger);
+    }
+
+    private void GetTired(int stamina)
+    {
+        if(staminaTimer >= staminaTiredRate)
+        {
+            currentStamina -= stamina;
+            staminaBar.setStamina(currentStamina);
+            staminaTimer = 0;
+        }
+        staminaTimer += Time.deltaTime;
+    }
+
+    private void rechargeStamina()
+    {
+        if(staminaTimer >= staminaRechargeRate)
+        {
+            currentStamina += 2;
+            staminaBar.setStamina(currentStamina);
+            staminaTimer = 0;
+        }
+        staminaTimer += Time.deltaTime;
     }
 }
