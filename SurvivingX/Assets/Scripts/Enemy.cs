@@ -12,10 +12,13 @@ public class Enemy : MonoBehaviour
     public float lookRadius = 15f;
     public float damageRadius = 5f;
 
+    PlayerStats playerStats;
+
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        playerStats = FindObjectOfType<PlayerStats>();
         changeWanderingDirection();
     }
 
@@ -35,7 +38,12 @@ public class Enemy : MonoBehaviour
             // Deal damage to the player if within damage radius of 3
             if (distance <= damageRadius)
             {
+                playerStats.takingDamage = true;
                 Debug.Log("I am dealing damage");
+            }
+            else
+            {
+                playerStats.takingDamage = false;
             }
         }
 
