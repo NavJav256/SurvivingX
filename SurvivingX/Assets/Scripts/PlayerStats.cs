@@ -26,6 +26,8 @@ public class PlayerStats : MonoBehaviour
     HealthBar healthBar;
 
     public bool takingDamage = false;
+    float attackSpeed = 3f;
+    float attackTimer;
 
     private void Start()
     {
@@ -37,7 +39,12 @@ public class PlayerStats : MonoBehaviour
     {
         if(takingDamage)
         {
-            TakeDamage(10);
+            if(attackTimer >= attackSpeed)
+            {
+                TakeDamage(10);
+                attackTimer = 0;
+            }
+            attackTimer += Time.deltaTime;
         }
         if (currentHealth <= 0) 
         {
