@@ -21,6 +21,12 @@ public class PlayerController : MonoBehaviour
     public float rayCastHeightOffset = 0.5f;
     public LayerMask groundLayer;
 
+    [Header("Jumping")]
+    [SerializeField]
+    float jumpHeight = 3;
+    [SerializeField]
+    float gravityIntensity = -15;
+
     [Header("Movement Flags")]
     [SerializeField]
     public bool isSprinting;
@@ -70,6 +76,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleRotation()
     {
+
+        if (isJumping) return;
+
         Vector3 targetDirection = Vector3.zero;
         targetDirection = cameraObject.forward * inputManager.verticalInput;
         targetDirection += cameraObject.right * inputManager.horizontalInput;
@@ -90,7 +99,7 @@ public class PlayerController : MonoBehaviour
         Vector3 rayCastOrigin = transform.position;
         rayCastOrigin.y += rayCastHeightOffset;
 
-        if(!isGrounded)
+        if(!isGrounded && !isJumping)
         {
             if (!playerManager.isInteracting) animManager.PlayTargetAnimation("Falling Idle", true);
             inAirTimer += Time.deltaTime;
@@ -115,6 +124,12 @@ public class PlayerController : MonoBehaviour
         if(isGrounded)
         {
             animManager.animator.SetBool("isJumping", true);
+            animManager.PlayTargetAnimation("Jumping", false);
+
+            float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+            Vector3 playerVelocity = moveDirection;
+            playerVelocity.y = jumpingVelocity;
+            rb.velocity = playerVelocity;
         }
     }
 

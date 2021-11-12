@@ -26,7 +26,7 @@ public class PlayerStats : MonoBehaviour
     HealthBar healthBar;
 
     public bool takingDamage = false;
-    float attackSpeed = 3f;
+    float attackSpeed = 1.5f;
     float attackTimer;
 
     private void Start()

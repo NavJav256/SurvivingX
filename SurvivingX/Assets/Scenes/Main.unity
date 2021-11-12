@@ -10093,11 +10093,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inAirTimer: 0
   leapingVelocity: 5
-  fallingSpeed: 300
+  fallingSpeed: 30
   rayCastHeightOffset: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+  jumpHeight: 3
+  gravityIntensity: -15
   isSprinting: 0
   isWalking: 0
   isGrounded: 1
