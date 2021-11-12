@@ -1,17 +1,27 @@
 # SurvivingX
 
+SurvivngX is a 3D open world game where a player is chucked in a random world and has to survive in the conditions given to him. Players can collect resources, defeat enemies to get loot and craft items to be stronger than what they already have.
+
 ## Features:
-Implemented | Coming soon
-------------|-------------
-3D open world map | Inventory and crafting system
-3D character, animations and movement | Procedural world generation
-Health, hunger and stamina system | Enemy AI and combat system
-Items and resources | Quest system
+
+### Features implemented:
+* 3D open world map
+* 3D character, animations and movement
+* Health system (with hunger bar and stamina bar)
+* Enemy AI
+
+### Features Coming soon:
+* Inventory and crafting system
+* Procedural world generation
+* Items and resources to collect
+* Combat system
+* Quest system
 
 ## Controls
 * Use WASD to move around
-* Use shift to sprint
-* Use ctrl to walk
+* Press (and hold) shift to sprint
+* Press (and hold) ctrl to walk
+* Pres space to jump
 * Use mouse to look around
 
 ## Web Build
