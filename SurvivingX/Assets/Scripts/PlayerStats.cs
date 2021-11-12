@@ -83,6 +83,6 @@ public class PlayerStats : MonoBehaviour
     private void GetHungry(int hunger)
     {
         currentHunger -= hunger;
-        hungerBar.setHunger(currentHunger);
+        //hungerBar.setHunger(currentHunger);
     }
 }
