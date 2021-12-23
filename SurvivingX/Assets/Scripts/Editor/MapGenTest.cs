@@ -12,9 +12,9 @@ public class MapGenTest : Editor
         
         if (DrawDefaultInspector())
         {
-            if (mapGen.update) mapGen.drawMapInEditor();
+            if (mapGen.autoUpdate) mapGen.drawInEditor();
         }
 
-        if (GUILayout.Button("Generate")) mapGen.drawMapInEditor();
+        if (GUILayout.Button("Generate")) mapGen.drawInEditor();
     }
 }
