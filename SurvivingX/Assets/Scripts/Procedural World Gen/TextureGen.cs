@@ -24,7 +24,7 @@ public static class TextureGen
 		{
 			for (int x = 0; x < width; x++)
 			{
-				colourMap [y * width + x] = Color.Lerp(Color.black, Color.white, heightMap [x, y]);
+				colourMap[y * width + x] = Color.Lerp(Color.black, Color.white, heightMap[x, y]);
 			}
 		}
 

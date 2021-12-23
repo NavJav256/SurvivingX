@@ -37,8 +37,8 @@ public class MapGen : MonoBehaviour
 		MapData mapData = generateMapData(Vector2.zero);
 		MapDisplay display = GetComponent<MapDisplay>();
 
-		if (drawMode == DrawMode.NoiseMap) display.drawTexture (TextureGen.createTextureFromHeightMap(mapData.heightMap));
-		else if (drawMode == DrawMode.ColourMap) display.drawTexture (TextureGen.createTextureFromColourMap(mapData.colourMap, mapChunkSize, mapChunkSize));
+		if (drawMode == DrawMode.NoiseMap) display.drawTexture(TextureGen.createTextureFromHeightMap(mapData.heightMap));
+		else if (drawMode == DrawMode.ColourMap) display.drawTexture(TextureGen.createTextureFromColourMap(mapData.colourMap, mapChunkSize, mapChunkSize));
 		else if (drawMode == DrawMode.Mesh) display.drawMesh(MeshGen.createTerrainMesh(mapData.heightMap, meshHeightMultiplier, meshHeightCurve, editorPreviewLOD), TextureGen.createTextureFromColourMap(mapData.colourMap, mapChunkSize, mapChunkSize));
 	}
 
@@ -152,7 +152,8 @@ public struct TerrainType
 	public Color colour;
 }
 
-public struct MapData {
+public struct MapData
+{
 	public readonly float[,] heightMap;
 	public readonly Color[] colourMap;
 

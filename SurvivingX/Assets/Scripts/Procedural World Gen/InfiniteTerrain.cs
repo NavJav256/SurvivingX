@@ -19,8 +19,8 @@ public class InfiniteTerrain : MonoBehaviour
 	int chunkSize;
 	int chunksVisibleInViewDst;
 
-	Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
-	List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
+	Dictionary<Vector2, Chunk> chunkDictionary = new Dictionary<Vector2, Chunk>();
+	List<Chunk> chunksVisibleLastUpdate = new List<Chunk>();
 
 	void Start() 
 	{
@@ -46,11 +46,11 @@ public class InfiniteTerrain : MonoBehaviour
 		
 	void updateVisibleChunks() {
 
-		for (int i = 0; i < terrainChunksVisibleLastUpdate.Count; i++) 
+		for (int i = 0; i < chunksVisibleLastUpdate.Count; i++) 
 		{
-			terrainChunksVisibleLastUpdate[i].setVisible(false);
+			chunksVisibleLastUpdate[i].setVisible(false);
 		}
-		terrainChunksVisibleLastUpdate.Clear();
+		chunksVisibleLastUpdate.Clear();
 			
 		int currentChunkCoordX = Mathf.RoundToInt(viewerPosition.x / chunkSize);
 		int currentChunkCoordY = Mathf.RoundToInt(viewerPosition.y / chunkSize);
@@ -61,18 +61,18 @@ public class InfiniteTerrain : MonoBehaviour
 			{
 				Vector2 viewedChunkCoord = new Vector2(currentChunkCoordX + xOffset, currentChunkCoordY + yOffset);
 
-				if (terrainChunkDictionary.ContainsKey(viewedChunkCoord)) 
+				if (chunkDictionary.ContainsKey(viewedChunkCoord)) 
 				{
-					terrainChunkDictionary[viewedChunkCoord].updateTerrainChunk();
-					if (terrainChunkDictionary[viewedChunkCoord].isVisible()) terrainChunksVisibleLastUpdate.Add(terrainChunkDictionary[viewedChunkCoord]);
+					chunkDictionary[viewedChunkCoord].updateTerrainChunk();
+					if (chunkDictionary[viewedChunkCoord].isVisible()) chunksVisibleLastUpdate.Add(chunkDictionary[viewedChunkCoord]);
 				} else {
-					terrainChunkDictionary.Add(viewedChunkCoord, new TerrainChunk(viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial));
+					chunkDictionary.Add(viewedChunkCoord, new Chunk(viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial));
 				}
 			}
 		}
 	}
 
-	public class TerrainChunk 
+	public class Chunk 
 	{
 		GameObject meshObject;
 		Vector2 position;
@@ -88,7 +88,7 @@ public class InfiniteTerrain : MonoBehaviour
 		bool mapDataReceived;
 		int previousLODIndex = -1;
 
-		public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material) 
+		public Chunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material) 
 		{
 			this.detailLevels = detailLevels;
 
@@ -96,7 +96,7 @@ public class InfiniteTerrain : MonoBehaviour
 			bounds = new Bounds(position,Vector2.one * size);
 			Vector3 positionV3 = new Vector3(position.x,0,position.y);
 
-			meshObject = new GameObject("Terrain Chunk");
+			meshObject = new GameObject("Chunk");
 			meshRenderer = meshObject.AddComponent<MeshRenderer>();
 			meshFilter = meshObject.AddComponent<MeshFilter>();
 			meshRenderer.material = material;
