@@ -121,6 +121,7 @@ public class MeshData
 			triangles[triangleIndex + 2] = c;
 			triangleIndex += 3;
         }
+
 	}
 
 	private Vector3[] calculateNormals()
