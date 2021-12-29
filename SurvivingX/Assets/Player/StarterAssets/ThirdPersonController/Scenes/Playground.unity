@@ -217,7 +217,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 358697472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32c9cfdd03d0b5d41a5574f4a6f28a9f, type: 3}
+  m_Script: {fileID: 11500000, guid: aa722cc73e58e324e931694493595132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   aimVirtualCamera: {fileID: 889121904}
@@ -225,10 +225,10 @@ MonoBehaviour:
   aimSensitivity: 0.5
   ColliderLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  debugTran: {fileID: 1948610841}
-  bulletPrefab: {fileID: 8955093190925313487, guid: 81cebb98cb956ac49980b7535343ed3c, type: 3}
-  spawnBullet: {fileID: 479338688}
+    m_Bits: 0
+  debugTran: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  spawnBullet: {fileID: 0}
 --- !u!1 &479338687
 GameObject:
   m_ObjectHideFlags: 0
