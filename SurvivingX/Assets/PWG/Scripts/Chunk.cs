@@ -10,6 +10,8 @@ public class Chunk
 	Vector2 sampleCentre;
 	Bounds bounds;
 
+	GameObject sampleCube;
+
 	MeshRenderer meshRenderer;
 	MeshFilter meshFilter;
 	MeshCollider meshCollider;
@@ -47,6 +49,10 @@ public class Chunk
 		meshFilter = meshObject.AddComponent<MeshFilter>();
 		meshCollider = meshObject.AddComponent<MeshCollider>();
 		meshRenderer.material = material;
+
+		sampleCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		sampleCube.transform.position = new Vector3(0, 5, 0);
+		sampleCube.transform.parent = meshObject.transform;
 
 		meshObject.transform.position = new Vector3(position.x, 0, position.y);
 		meshObject.transform.parent = parent;
