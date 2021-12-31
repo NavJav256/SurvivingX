@@ -16,6 +16,9 @@ public class TerrainGen : MonoBehaviour
 	public Transform viewer;
 	public Material mapMaterial;
 
+	public Enemies[] enemies;
+	public Vegetation[] vegetation;
+
 	Vector2 viewerPosition;
 	Vector2 viewerPositionOld;
 
@@ -24,6 +27,7 @@ public class TerrainGen : MonoBehaviour
 
 	Dictionary<Vector2, Chunk> terrainChunkDictionary = new Dictionary<Vector2, Chunk>();
 	List<Chunk> visibleTerrainChunks = new List<Chunk>();
+
 
 	void Start() 
 	{
@@ -77,7 +81,7 @@ public class TerrainGen : MonoBehaviour
 				{
 					if (terrainChunkDictionary.ContainsKey(viewedChunkCoord)) terrainChunkDictionary[viewedChunkCoord].UpdateTerrainChunk();
 					else {
-						Chunk newChunk = new Chunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial);
+						Chunk newChunk = new Chunk(viewedChunkCoord, heightMapSettings, meshSettings, textureSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, enemies, vegetation);
 						terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
 						newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
 						newChunk.Load();
@@ -110,4 +114,18 @@ public struct LODInfo
 			return visibleDstThreshold * visibleDstThreshold;
 		}
 	}
+}
+
+[System.Serializable]
+public struct Enemies
+{
+	public GameObject prefab;
+	public int count;
+}
+
+[System.Serializable]
+public struct Vegetation
+{
+	public GameObject prefab;
+	public int count;
 }

@@ -28,21 +28,22 @@ public class Chunk
 
 	HeightMapSettings heightMapSettings;
 	MeshSettings meshSettings;
+	TextureData textureData;
 	Transform viewer;
 
-	public Chunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material) 
+	public Chunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, TextureData textureData, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, Enemies[] enemies, Vegetation[] vegetation) 
 	{
 		this.coord = coord;
 		this.detailLevels = detailLevels;
 		this.colliderLODIndex = colliderLODIndex;
 		this.heightMapSettings = heightMapSettings;
 		this.meshSettings = meshSettings;
+		this.textureData = textureData;
 		this.viewer = viewer;
 
 		sampleCentre = coord * meshSettings.meshWorldSize / meshSettings.meshScale;
 		Vector2 position = coord * meshSettings.meshWorldSize ;
-		bounds = new Bounds(position,Vector2.one * meshSettings.meshWorldSize);
-
+		bounds = new Bounds(position, Vector2.one * meshSettings.meshWorldSize);
 
 		meshObject = new GameObject("Chunk");
 		meshRenderer = meshObject.AddComponent<MeshRenderer>();
@@ -50,9 +51,17 @@ public class Chunk
 		meshCollider = meshObject.AddComponent<MeshCollider>();
 		meshRenderer.material = material;
 
-		sampleCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		sampleCube.transform.position = new Vector3(0, 5, 0);
-		sampleCube.transform.parent = meshObject.transform;
+		//Add in enemies
+        for (int i = 0; i < enemies.Length; i++)
+        {
+			CreateObjects(enemies[i].prefab, enemies[i].count, meshObject.transform);
+        }
+
+        //Add Vegetation
+        for (int i = 0; i < vegetation.Length; i++)
+        {
+			CreateVegetation(vegetation[i].prefab, vegetation[i].count, meshObject.transform);
+        }
 
 		meshObject.transform.position = new Vector3(position.x, 0, position.y);
 		meshObject.transform.parent = parent;
@@ -151,6 +160,26 @@ public class Chunk
 					hasSetCollider = true;
 				}
 			}
+		}
+	}
+
+	private void CreateObjects(GameObject prefab, int numberOfObjects, Transform parent)
+    {
+        for (int i = 0; i < numberOfObjects; i++)
+        {
+			var pos = new Vector3(Random.Range(-73.0f, 73.0f), 3, Random.Range(-73.0f, 73.0f));
+			Object.Instantiate(prefab, pos, Quaternion.identity, parent);
+        }
+	}
+
+	private void CreateVegetation(GameObject prefab, int numberOfVegetation, Transform parent)
+    {
+		float startHeight = textureData.layers[2].startHeight;
+		float endHeight = textureData.layers[3].startHeight;
+		for (int i = 0; i < numberOfVegetation; i++)
+		{
+			var pos = new Vector3(Random.Range(-73.0f, 73.0f), Random.Range(startHeight, endHeight), Random.Range(-73.0f, 73.0f));
+			Object.Instantiate(prefab, pos, Quaternion.identity, parent);
 		}
 	}
 
