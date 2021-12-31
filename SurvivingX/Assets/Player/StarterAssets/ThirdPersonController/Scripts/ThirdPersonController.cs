@@ -94,6 +94,8 @@ namespace StarterAssets
 
 		private bool _hasAnimator;
 
+		public bool invertYAxis;
+
 		private void Awake()
 		{
 			// get a reference to our main camera
@@ -114,6 +116,8 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+			invertYAxis = StateController.invertYAxis;
 		}
 
 		private void Update()
@@ -158,7 +162,15 @@ namespace StarterAssets
 			if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
 			{
 				_cinemachineTargetYaw += _input.look.x * Time.deltaTime * Sensitivty;
-				_cinemachineTargetPitch += _input.look.y * Time.deltaTime * Sensitivty;
+
+				if(invertYAxis)
+                {
+					_cinemachineTargetPitch += -_input.look.y * Time.deltaTime * Sensitivty;
+				}
+				else
+                {
+					_cinemachineTargetPitch += _input.look.y * Time.deltaTime * Sensitivty;
+				}
 			}
 
 			// clamp our rotations so our values are limited 360 degrees
@@ -173,7 +185,7 @@ namespace StarterAssets
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-
+			
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
@@ -192,13 +204,14 @@ namespace StarterAssets
 				// creates curved result rather than a linear one giving a more organic speed change
 				// note T in Lerp is clamped, so we don't need to clamp our speed
 				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
-
+				Debug.Log("Im moving");
 				// round speed to 3 decimal places
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;
 			}
 			else
 			{
 				_speed = targetSpeed;
+				Debug.Log("Not moving");
 			}
 			_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
 
@@ -231,6 +244,7 @@ namespace StarterAssets
 			{
 				_animator.SetFloat(_animIDSpeed, _animationBlend);
 				_animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+				
 			}
 		}
 

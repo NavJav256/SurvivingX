@@ -10,10 +10,6 @@ public class ShooterController : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera aimVirtualCamera;
     [SerializeField]
-    private float normalSensitivity;
-    [SerializeField]
-    private float aimSensitivity;
-    [SerializeField]
     private LayerMask ColliderLayerMask = new LayerMask();
     [SerializeField]
     private Transform debugTran;
@@ -22,8 +18,18 @@ public class ShooterController : MonoBehaviour
     [SerializeField]
     private Transform spawnBullet;
 
+    
+    private float normalSensitivity;
+    private float aimSensitivity;
+
     private StarterAssetsInputs starter;
     private ThirdPersonController third;
+
+    private void Start()
+    {
+        normalSensitivity = StateController.gameSensitivity;
+        aimSensitivity = StateController.aimSensitivity;
+    }
 
     private void Awake()
     {
@@ -68,6 +74,16 @@ public class ShooterController : MonoBehaviour
             starter.shoot = false;
         }
 
+    }
+
+    public void changeMouseSensitivity(float sen)
+    {
+        this.normalSensitivity = sen;
+    }
+
+    public void changeAimSensitivity(float sen)
+    {
+        this.aimSensitivity = sen;
     }
 
 }
