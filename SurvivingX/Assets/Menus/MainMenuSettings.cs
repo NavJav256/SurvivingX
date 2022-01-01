@@ -27,9 +27,21 @@ public class MainMenuSettings : MonoBehaviour
         StateController.gameSensitivity = 1f;
         StateController.aimSensitivity = 0.5f;
         StateController.invertYAxis = false;
+        AudioListener.volume = 1f;
+    }
+
+    public void changeVolume(float value)
+    {
+        AudioListener.volume = value;
     }
 
     public void setMasterVolume(float volume)
+    {
+        //audioMixer.SetFloat("Volume", volume);
+        AudioListener.volume = volume;
+    }
+
+    public void setBackgroundVolume(float volume)
     {
         audioMixer.SetFloat("Volume", volume);
     }
