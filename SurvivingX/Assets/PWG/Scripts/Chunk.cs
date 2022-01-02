@@ -51,6 +51,21 @@ public class Chunk
 		meshCollider = meshObject.AddComponent<MeshCollider>();
 		meshRenderer.material = material;
 
+
+		sampleCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		sampleCube.AddComponent<Spawner>();
+		sampleCube.transform.position = new Vector3(0, -1, 0);
+		sampleCube.transform.parent = meshObject.transform;
+		var spawner = sampleCube.GetComponent<Spawner>();
+		spawner.player = viewer;
+		spawner.prefab = enemies[0].prefab;
+		spawner.spawnAmount = enemies[0].count;
+		spawner.spawnLimit = 25;
+		spawner.rate = 0.5f;
+		spawner.spawnThreshold = maxViewDst;
+
+
+		/*
 		//Add in enemies
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -62,6 +77,7 @@ public class Chunk
         {
 			CreateVegetation(vegetation[i].prefab, vegetation[i].count, meshObject.transform);
         }
+		*/
 
 		meshObject.transform.position = new Vector3(position.x, 0, position.y);
 		meshObject.transform.parent = parent;
@@ -167,15 +183,16 @@ public class Chunk
     {
         for (int i = 0; i < numberOfObjects; i++)
         {
-			var pos = new Vector3(Random.Range(-73.0f, 73.0f), 3, Random.Range(-73.0f, 73.0f));
+			var pos = new Vector3(Random.Range(-73.0f, 73.0f), 10, Random.Range(-73.0f, 73.0f));
 			Object.Instantiate(prefab, pos, Quaternion.identity, parent);
         }
 	}
 
 	private void CreateVegetation(GameObject prefab, int numberOfVegetation, Transform parent)
     {
-		float startHeight = textureData.layers[2].startHeight;
-		float endHeight = textureData.layers[3].startHeight;
+		float startHeight = textureData.layers[1].startHeight;
+		float endHeight = textureData.layers[2].startHeight;
+		int count = 0;
 		for (int i = 0; i < numberOfVegetation; i++)
 		{
 			var pos = new Vector3(Random.Range(-73.0f, 73.0f), Random.Range(startHeight, endHeight), Random.Range(-73.0f, 73.0f));
