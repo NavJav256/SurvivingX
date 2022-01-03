@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class Chunk 
 {
@@ -15,6 +16,7 @@ public class Chunk
 	MeshRenderer meshRenderer;
 	MeshFilter meshFilter;
 	MeshCollider meshCollider;
+    NavMeshAgent navMesh;
 
 	LODInfo[] detailLevels;
 	LODMesh[] lodMeshes;
@@ -49,6 +51,7 @@ public class Chunk
 		meshRenderer = meshObject.AddComponent<MeshRenderer>();
 		meshFilter = meshObject.AddComponent<MeshFilter>();
 		meshCollider = meshObject.AddComponent<MeshCollider>();
+		navMesh = meshObject.AddComponent<NavMeshAgent>();
 		meshRenderer.material = material;
 
 
