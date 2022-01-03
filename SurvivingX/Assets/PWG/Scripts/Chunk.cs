@@ -16,7 +16,7 @@ public class Chunk
 	MeshRenderer meshRenderer;
 	MeshFilter meshFilter;
 	MeshCollider meshCollider;
-    NavMeshAgent navMesh;
+    //NavMeshAgent navMesh;
 
 	LODInfo[] detailLevels;
 	LODMesh[] lodMeshes;
@@ -51,7 +51,7 @@ public class Chunk
 		meshRenderer = meshObject.AddComponent<MeshRenderer>();
 		meshFilter = meshObject.AddComponent<MeshFilter>();
 		meshCollider = meshObject.AddComponent<MeshCollider>();
-		navMesh = meshObject.AddComponent<NavMeshAgent>();
+		//navMesh = meshObject.AddComponent<NavMeshAgent>();
 		meshRenderer.material = material;
 
 
@@ -67,14 +67,6 @@ public class Chunk
 		spawner.rate = 3f;
 		spawner.spawnThreshold = 50f; //chunk limit 73
 
-
-		/*
-		//Add in enemies
-        for (int i = 0; i < enemies.Length; i++)
-        {
-			CreateObjects(enemies[i].prefab, enemies[i].count, meshObject.transform);
-        }
-		*/
         //Add Vegetation
         for (int i = 0; i < vegetation.Length; i++)
         {
@@ -180,15 +172,6 @@ public class Chunk
 				}
 			}
 		}
-	}
-
-	private void CreateObjects(GameObject prefab, int numberOfObjects, Transform parent)
-    {
-        for (int i = 0; i < numberOfObjects; i++)
-        {
-			var pos = new Vector3(Random.Range(-73.0f, 73.0f), 10, Random.Range(-73.0f, 73.0f));
-			Object.Instantiate(prefab, pos, Quaternion.identity, parent);
-        }
 	}
 
 	private void CreateVegetation(GameObject prefab, int numberOfVegetation, Transform parent)
