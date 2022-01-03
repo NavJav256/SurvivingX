@@ -65,7 +65,7 @@ public class Chunk
 		spawner.spawnAmount = 1;
 		spawner.spawnLimit = enemies[0].count;
 		spawner.rate = 3f;
-		spawner.spawnThreshold = 50f; //chunk limit 73
+		spawner.spawnThreshold = 20f; //chunk limit 24.5
 
         //Add Vegetation
         for (int i = 0; i < vegetation.Length; i++)
@@ -180,7 +180,7 @@ public class Chunk
 		float endHeight = textureData.layers[2].startHeight;
 		for (int i = 0; i < numberOfVegetation; i++)
 		{
-			var pos = new Vector3(Random.Range(-73.0f, 73.0f), Random.Range(startHeight, endHeight), Random.Range(-73.0f, 73.0f));
+			var pos = new Vector3(Random.Range(-24.5f, 24.5f), Random.Range(startHeight, endHeight), Random.Range(-24.5f, 24.5f));
 			Object.Instantiate(prefab, pos, Quaternion.identity, parent);
 		}
 	}

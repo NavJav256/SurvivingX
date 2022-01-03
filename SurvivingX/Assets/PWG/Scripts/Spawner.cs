@@ -45,11 +45,20 @@ public class Spawner : MonoBehaviour
                 if (spawnTimer <= 0f) Spawn();
             }
         }
+        Remove();
     }
 
     private void Spawn()
     {
         Vector3 spawnPos = new Vector3(Random.Range(this.transform.position.x-15f, this.transform.position.x+15f), 5, Random.Range(this.transform.position.z-15f, this.transform.position.z+15f));
         Instantiate(prefab, spawnPos, Quaternion.identity, this.transform);
+    }
+
+    private void Remove()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.transform.position.y <= -5f) Destroy(child.gameObject);
+        }
     }
 }
