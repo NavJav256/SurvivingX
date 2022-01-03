@@ -204,14 +204,14 @@ namespace StarterAssets
 				// creates curved result rather than a linear one giving a more organic speed change
 				// note T in Lerp is clamped, so we don't need to clamp our speed
 				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
-				Debug.Log("Im moving");
+				//Debug.Log("Im moving");
 				// round speed to 3 decimal places
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;
 			}
 			else
 			{
 				_speed = targetSpeed;
-				Debug.Log("Not moving");
+				//Debug.Log("Not moving");
 			}
 			_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
 

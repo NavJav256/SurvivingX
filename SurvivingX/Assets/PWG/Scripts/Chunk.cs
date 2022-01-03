@@ -59,10 +59,10 @@ public class Chunk
 		var spawner = sampleCube.GetComponent<Spawner>();
 		spawner.player = viewer;
 		spawner.prefab = enemies[0].prefab;
-		spawner.spawnAmount = enemies[0].count;
-		spawner.spawnLimit = 25;
-		spawner.rate = 0.5f;
-		spawner.spawnThreshold = maxViewDst;
+		spawner.spawnAmount = 1;
+		spawner.spawnLimit = enemies[0].count;
+		spawner.rate = 3f;
+		spawner.spawnThreshold = 50f; //chunk limit 73
 
 
 		/*
@@ -71,13 +71,13 @@ public class Chunk
         {
 			CreateObjects(enemies[i].prefab, enemies[i].count, meshObject.transform);
         }
-
+		*/
         //Add Vegetation
         for (int i = 0; i < vegetation.Length; i++)
         {
 			CreateVegetation(vegetation[i].prefab, vegetation[i].count, meshObject.transform);
         }
-		*/
+		
 
 		meshObject.transform.position = new Vector3(position.x, 0, position.y);
 		meshObject.transform.parent = parent;
@@ -192,7 +192,6 @@ public class Chunk
     {
 		float startHeight = textureData.layers[1].startHeight;
 		float endHeight = textureData.layers[2].startHeight;
-		int count = 0;
 		for (int i = 0; i < numberOfVegetation; i++)
 		{
 			var pos = new Vector3(Random.Range(-73.0f, 73.0f), Random.Range(startHeight, endHeight), Random.Range(-73.0f, 73.0f));

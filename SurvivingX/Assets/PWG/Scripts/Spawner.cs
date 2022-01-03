@@ -11,6 +11,8 @@ public class Spawner : MonoBehaviour
     public float rate;
     public float spawnThreshold;
 
+    float spawnTimer;
+
     Vector2 spawnerPosition
     {
         get
@@ -29,21 +31,25 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        
+        spawnTimer = rate;
     }
 
     void Update()
     {
         float distance = Vector2.Distance(playerPosition, spawnerPosition);
-        if (distance <= spawnThreshold) Spawn();
+        if (distance <= spawnThreshold)
+        {
+            if (transform.childCount < spawnLimit)
+            {
+                spawnTimer -= Time.deltaTime;
+                if (spawnTimer <= 0f) Spawn();
+            }
+        }
     }
 
     private void Spawn()
     {
-        for (int i = 0; i < spawnAmount; i++)
-        {
-            Vector3 spawnPos = new Vector3(Random.Range(-15f, 15f), 10, Random.Range(-15f, 15f));
-            Instantiate(prefab, spawnPos, Quaternion.identity, this.transform);
-        }
+        Vector3 spawnPos = new Vector3(Random.Range(this.transform.position.x-15f, this.transform.position.x+15f), 5, Random.Range(this.transform.position.z-15f, this.transform.position.z+15f));
+        Instantiate(prefab, spawnPos, Quaternion.identity, this.transform);
     }
 }
