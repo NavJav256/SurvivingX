@@ -2085,7 +2085,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522957207}
-  m_Mesh: {fileID: 1852631234}
+  m_Mesh: {fileID: 1759414024}
 --- !u!4 &522957210
 Transform:
   m_ObjectHideFlags: 0
@@ -5287,72 +5287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 684be7a9e3eabc4478f969f3b0691943, type: 3}
---- !u!1 &1801773211 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8944336655422409498, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
-  m_PrefabInstance: {fileID: 226813733}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1801773215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801773211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 1624400250}
-  volumeLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 0
-  antialiasingMode: 0
-  temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
---- !u!43 &1852631234
+--- !u!43 &1759414024
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5516,6 +5451,71 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1801773211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8944336655422409498, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+  m_PrefabInstance: {fileID: 226813733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1801773215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801773211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 1624400250}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1001 &1857722606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5659,7 +5659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  dayLength: 15
+  dayLength: 300
   startDayTime: 0.4
   noon: {x: 90, y: 0, z: 0}
   lightOfSun: {fileID: 962081136}
