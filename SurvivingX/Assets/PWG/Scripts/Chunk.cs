@@ -16,7 +16,7 @@ public class Chunk
 	MeshRenderer meshRenderer;
 	MeshFilter meshFilter;
 	MeshCollider meshCollider;
-    //NavMeshAgent navMesh;
+    public NavMeshSurface navMesh;
 
 	LODInfo[] detailLevels;
 	LODMesh[] lodMeshes;
@@ -51,7 +51,8 @@ public class Chunk
 		meshRenderer = meshObject.AddComponent<MeshRenderer>();
 		meshFilter = meshObject.AddComponent<MeshFilter>();
 		meshCollider = meshObject.AddComponent<MeshCollider>();
-		//navMesh = meshObject.AddComponent<NavMeshAgent>();
+		navMesh = meshObject.AddComponent<NavMeshSurface>();
+		navMesh.collectObjects = CollectObjects.Children;
 		meshRenderer.material = material;
 
 
@@ -65,7 +66,7 @@ public class Chunk
 		spawner.spawnAmount = 1;
 		spawner.spawnLimit = enemies[0].count;
 		spawner.rate = 3f;
-		spawner.spawnThreshold = 20f; //chunk limit 24.5
+		spawner.spawnThreshold = 25f; //chunk limit 24.5
 
         //Add Vegetation
         for (int i = 0; i < vegetation.Length; i++)

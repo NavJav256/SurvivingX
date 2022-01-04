@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Spawner : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class Spawner : MonoBehaviour
     public float spawnThreshold;
 
     float spawnTimer;
+    public GameObject parent;
+    public NavMeshSurface navmesh;
+    public bool isBaked;
 
     Vector2 spawnerPosition
     {
@@ -32,6 +36,10 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         spawnTimer = rate;
+        parent = this.transform.parent.gameObject;
+        navmesh = parent.GetComponent<NavMeshSurface>();
+        isBaked = false;
+        
     }
 
     void Update()
@@ -39,6 +47,11 @@ public class Spawner : MonoBehaviour
         float distance = Vector2.Distance(playerPosition, spawnerPosition);
         if (distance <= spawnThreshold)
         {
+            if (!isBaked)
+            {
+                navmesh.BuildNavMesh();
+                isBaked = true;
+            }
             if (transform.childCount < spawnLimit)
             {
                 spawnTimer -= Time.deltaTime;
