@@ -6,6 +6,7 @@ public class BulletProjectile : MonoBehaviour
 {
 
     private Rigidbody bulletRigid;
+    public float damage = 5f;
 
     private void Awake()
     {
@@ -16,8 +17,6 @@ public class BulletProjectile : MonoBehaviour
     {
         bulletRigid.velocity = transform.forward  * 50f;
     }
-
-    
 
     private void OnCollisionEnter(Collision collision)
     {

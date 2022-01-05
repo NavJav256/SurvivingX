@@ -36,6 +36,8 @@ public class Enemy : MonoBehaviour
 
         healthSlider.value = calculateHealth();
 
+        agent.speed = 3.5f;
+
         // Distance from the player to agent (enemy)
         float distance = Vector3.Distance(target.position, transform.position);
 
@@ -46,6 +48,7 @@ public class Enemy : MonoBehaviour
         {
             agent.destination = target.position;
             agent.isStopped = false;
+            agent.speed = 8f;
             animator.SetLayerWeight(3, Mathf.Lerp(animator.GetLayerWeight(3), 1f, Time.deltaTime * 10f));
             if (distance <= agent.stoppingDistance)
             {
@@ -104,10 +107,11 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag=="Bullet")
+        BulletProjectile bullet = collision.gameObject.GetComponent<BulletProjectile>();
+        if (collision.gameObject.tag=="Bullet")
         {
             Debug.Log("Monster has been hit");
-            health -= 5f;
+            health -= bullet.damage;
             // Enemy has died
             if (health <= 0)
             {
