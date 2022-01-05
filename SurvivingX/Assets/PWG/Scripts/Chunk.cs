@@ -33,6 +33,8 @@ public class Chunk
 	TextureData textureData;
 	Transform viewer;
 
+	AreaBake areaBake;
+
 	public Chunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, TextureData textureData, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, Enemies[] enemies, Vegetation[] vegetation) 
 	{
 		this.coord = coord;
@@ -53,7 +55,12 @@ public class Chunk
 		meshCollider = meshObject.AddComponent<MeshCollider>();
 		navMesh = meshObject.AddComponent<NavMeshSurface>();
 		navMesh.collectObjects = CollectObjects.Children;
+		areaBake = meshObject.AddComponent<AreaBake>();
+		areaBake.surface = navMesh;
+		areaBake.player = viewer;
 		meshRenderer.material = material;
+
+		navMesh.BuildNavMesh();
 
 
 		sampleCube = GameObject.CreatePrimitive(PrimitiveType.Cube);

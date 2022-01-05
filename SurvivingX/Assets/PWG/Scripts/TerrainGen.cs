@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TerrainGen : MonoBehaviour
 {
@@ -25,8 +26,10 @@ public class TerrainGen : MonoBehaviour
 	float meshWorldSize;
 	int chunksVisibleInViewDst;
 
-	Dictionary<Vector2, Chunk> terrainChunkDictionary = new Dictionary<Vector2, Chunk>();
-	List<Chunk> visibleTerrainChunks = new List<Chunk>();
+	public Dictionary<Vector2, Chunk> terrainChunkDictionary = new Dictionary<Vector2, Chunk>();
+	public List<Chunk> visibleTerrainChunks = new List<Chunk>();
+
+	public List<NavMeshSurface> surfaces;
 
 
 	void Start() 
@@ -50,6 +53,7 @@ public class TerrainGen : MonoBehaviour
 			foreach (Chunk chunk in visibleTerrainChunks) 
 			{
 				chunk.UpdateCollisionMesh();
+				//surfaces.Add(chunk.navMesh);
 			}
 		}
 

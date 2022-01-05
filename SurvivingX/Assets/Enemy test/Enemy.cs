@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    Transform target;
-    NavMeshAgent agent;
+    public Transform target;
+    public NavMeshAgent agent;
     float moveTimer;
     float changeDirectionTimeLimit = 5f;
 
@@ -44,7 +44,8 @@ public class Enemy : MonoBehaviour
 
         if (distance <= lookRadius)
         {
-            agent.SetDestination(target.position);
+            agent.destination = target.position;
+            agent.isStopped = false;
             animator.SetLayerWeight(3, Mathf.Lerp(animator.GetLayerWeight(3), 1f, Time.deltaTime * 10f));
             if (distance <= agent.stoppingDistance)
             {
@@ -97,7 +98,8 @@ public class Enemy : MonoBehaviour
     {
         float newXDirection = Random.Range(-24.5f, 24.5f);
         float newYDirection = Random.Range(-24.5f, 24.5f);
-        agent.SetDestination(new Vector3(newXDirection, gameObject.transform.position.y, newYDirection));
+        agent.destination = (new Vector3(newXDirection, gameObject.transform.position.y, newYDirection));
+        agent.isStopped = false;
     }
 
     private void OnCollisionEnter(Collision collision)
