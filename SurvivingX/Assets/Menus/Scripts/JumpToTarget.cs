@@ -7,6 +7,8 @@ public class JumpToTarget : MonoBehaviour
 {
     public Transform target;
 
+    public float time;
+
     private void Start()
     {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
