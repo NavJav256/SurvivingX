@@ -8,7 +8,7 @@ public class AreaBake : MonoBehaviour
 {
     public NavMeshSurface surface;
     public Transform player;
-    private float updateRate = 0.1f;
+    private float updateRate = 0.05f;
     private float movementThreshold = 24.5f;
     private Vector3 navMeshSize = new Vector3(150, 10, 150);
     private Vector3 worldAnchor;
