@@ -5,21 +5,22 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    public Transform target;
-    public NavMeshAgent agent;
-    float moveTimer;
-    float changeDirectionTimeLimit = 5f;
+    private Transform target;
+    [SerializeField]
+    private float lookRadius = 15f;
+    [SerializeField]
+    private float damageRadius = 5f;
+    [SerializeField]
+    private Slider healthSlider;
 
-    public float lookRadius = 15f;
-    public float damageRadius = 5f;
-
+    private float damage = 5;
+    private NavMeshAgent agent;
+    private float moveTimer;
+    private float changeDirectionTimeLimit = 5f;
     private Animator animator;
 
     float health = 25f;
     float maxHealth = 35f;
-
-    [SerializeField]
-    private Slider healthSlider;
 
     void Start()
     {

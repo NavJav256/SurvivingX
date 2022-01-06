@@ -19,8 +19,12 @@ public class MainMenuSettings : MonoBehaviour
     private AudioSource forward;
     [SerializeField]
     private AudioSource back;
+    [SerializeField]
+    private Dropdown resDropDown;
 
     private bool yAxisState = false;
+
+    Resolution[] screenResolutions;
 
     private void Start()
     {
@@ -28,6 +32,19 @@ public class MainMenuSettings : MonoBehaviour
         StateController.aimSensitivity = 0.5f;
         StateController.invertYAxis = false;
         AudioListener.volume = 1f;
+
+        screenResolutions = Screen.resolutions;
+
+        resDropDown.ClearOptions();
+
+        List<string> resOptions = new List<string>();
+
+        for(int i=0; i<screenResolutions.Length; i++)
+        {
+            resOptions.Add(screenResolutions[i].width + " x " + screenResolutions[i].height);
+        }
+
+        resDropDown.AddOptions(resOptions);
     }
 
     public void changeVolume(float value)
@@ -89,5 +106,10 @@ public class MainMenuSettings : MonoBehaviour
     public void quitGame()
     {
         Application.Quit();
+    }
+
+    public void setFullScreen(bool fullScreenSate)
+    {
+        Screen.fullScreen = fullScreenSate;
     }
 }
