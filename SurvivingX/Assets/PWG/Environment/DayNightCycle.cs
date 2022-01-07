@@ -11,6 +11,9 @@ public class DayNightCycle : MonoBehaviour
     public float startDayTime = 0.4f; // Morning sun
     private float timeRate;
     public Vector3 noon; // Rotation of the sun
+    public GameObject targetLight;
+    public GameObject targetMainCamera;
+    public Material[] skys;
 
     [Header("Sun settings")]
     public Light lightOfSun;
@@ -25,6 +28,12 @@ public class DayNightCycle : MonoBehaviour
     [Header("Other Lighting options")]
     public AnimationCurve lightingIntensityMultiplier;
     public AnimationCurve reflectionIntensityMultiplier;
+
+    void Awake() 
+    {
+    //    targetLight = GameObject.FindGameObjectsWithTag("Light");
+        targetMainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+    }
 
     void Start()
     {
@@ -57,19 +66,23 @@ public class DayNightCycle : MonoBehaviour
         if(lightOfSun.intensity == 0 && lightOfSun.gameObject.activeInHierarchy)
         {
             lightOfSun.gameObject.SetActive(false);
+            targetMainCamera.GetComponent<Skybox>().material = skys[1];
         }
         else if(lightOfSun.intensity > 0 && !lightOfSun.gameObject.activeInHierarchy)
         {
             lightOfSun.gameObject.SetActive(true);
+            targetMainCamera.GetComponent<Skybox>().material = skys[0];
         }
 
         if (lightOfMoon.intensity == 0 && lightOfMoon.gameObject.activeInHierarchy)
         {
             lightOfMoon.gameObject.SetActive(false);
+            targetMainCamera.GetComponent<Skybox>().material = skys[0];
         }
         else if (lightOfMoon.intensity > 0 && !lightOfMoon.gameObject.activeInHierarchy)
         {
             lightOfMoon.gameObject.SetActive(true);
+            targetMainCamera.GetComponent<Skybox>().material = skys[1];
         }
 
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
