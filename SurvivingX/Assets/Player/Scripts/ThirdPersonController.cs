@@ -3,8 +3,6 @@
 using UnityEngine.InputSystem;
 #endif
 
-/* Note: animations are called via the controller for both the character and capsule using animator null checks
- */
 
 namespace StarterAssets
 {
@@ -99,7 +97,10 @@ namespace StarterAssets
 		public AudioSource walkingSound;
 		private bool walkSoundState = false;
 		public AudioSource runningSound;
-		private bool runSoundState;
+		private bool runSoundState = false;
+
+		public bool isSprinting;
+		public bool isShooting;
 
 		private void Awake()
 		{
@@ -132,6 +133,9 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			isSprinting = runSoundState;
+			if (Input.GetMouseButtonDown(0)) isShooting = true;
+			else isShooting = false;
 		}
 
 		private void LateUpdate()

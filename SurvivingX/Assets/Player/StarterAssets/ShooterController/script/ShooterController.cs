@@ -25,6 +25,8 @@ public class ShooterController : MonoBehaviour
     private StarterAssetsInputs starter;
     private ThirdPersonController third;
 
+    bool canShoot = true;
+
     private void Start()
     {
         normalSensitivity = StateController.gameSensitivity;
