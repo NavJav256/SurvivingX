@@ -7,17 +7,21 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Transform target;
     [SerializeField]
-    private float lookRadius = 15f;
-    [SerializeField]
-    private float damageRadius = 5f;
-    [SerializeField]
     private Slider healthSlider;
 
-    private float damage = 5;
+    private float damage = StateController.damage;
     private NavMeshAgent agent;
     private float moveTimer;
     private float changeDirectionTimeLimit = 5f;
     private Animator animator;
+    private float lookRadius = StateController.viewRadius;
+    private float damageRadius = StateController.damageRadius;
+    private float defaultSpeed = 3.5f;
+    private float chaseSpeed = StateController.enemyChaseSpeed;
+
+
+    public PlayerStats playerStats;
+
 
     float health = 25f;
     float maxHealth = 35f;
@@ -29,6 +33,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         health = maxHealth;
         healthSlider.value = calculateHealth();
+        //playerStats = GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -37,7 +42,7 @@ public class Enemy : MonoBehaviour
 
         healthSlider.value = calculateHealth();
 
-        agent.speed = 3.5f;
+        agent.speed = defaultSpeed;
 
         // Distance from the player to agent (enemy)
         float distance = Vector3.Distance(target.position, transform.position);
@@ -49,7 +54,7 @@ public class Enemy : MonoBehaviour
         {
             agent.destination = target.position;
             agent.isStopped = false;
-            agent.speed = 8f;
+            agent.speed = chaseSpeed;
             animator.SetLayerWeight(3, Mathf.Lerp(animator.GetLayerWeight(3), 1f, Time.deltaTime * 10f));
             if (distance <= agent.stoppingDistance)
             {

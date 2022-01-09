@@ -93,14 +93,36 @@ public class MainMenuSettings : MonoBehaviour
         yAxisState = false;
     }
 
-    public void forwardSound()
+    //We still need to add variables for how quick his mana regens etc stuff like that
+
+    public void easyGame()
     {
-        
+        StateController.enemyChaseSpeed = 5f;
+        StateController.viewRadius = 5f;
+        StateController.damageRadius = 2f;
+        StateController.enemySpeed = 4f;
+        StateController.damage = 3;
+        loadGame();
     }
 
-    public void backSound()
+    public void mediumGame()
     {
+        StateController.enemyChaseSpeed = 5f;
+        StateController.viewRadius = 5f;
+        StateController.damageRadius = 3f;
+        StateController.enemySpeed = 6f;
+        StateController.damage = 5;
+        loadGame();
+    }
 
+    public void hardGame()
+    {
+        StateController.enemyChaseSpeed = 4f;
+        StateController.viewRadius = 15f;
+        StateController.damageRadius = 4f;
+        StateController.enemySpeed = 9f;
+        StateController.damage = 7;
+        loadGame();
     }
 
     public void quitGame()
