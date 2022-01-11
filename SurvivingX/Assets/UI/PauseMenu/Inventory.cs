@@ -4,11 +4,11 @@ using UnityEngine;
 using StarterAssets;
 using UnityEngine.SceneManagement;
 
-public class PauseManager : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
     public static bool gamePaused = false;
 
-    public GameObject PauseMenuUI;
+    public GameObject inventory;
     public GameObject HUD;
 
     //public StarterAssetsInputs starter;
@@ -20,7 +20,7 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             if (gamePaused)
             {
@@ -35,7 +35,7 @@ public class PauseManager : MonoBehaviour
 
     public void Resume()
     {
-        PauseMenuUI.SetActive(false);
+        inventory.SetActive(false);
         Time.timeScale = 1f;
         gamePaused = false;
         HUD.SetActive(true);
@@ -43,7 +43,7 @@ public class PauseManager : MonoBehaviour
 
     public void Pause()
     {
-        PauseMenuUI.SetActive(true);
+        inventory.SetActive(true);
         Time.timeScale = 0f;
         gamePaused = true;
         HUD.SetActive(false);

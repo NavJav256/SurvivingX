@@ -7,6 +7,7 @@ public class PlayerStats : MonoBehaviour
 {
 
     StarterAssets.ThirdPersonController playerController;
+    ShooterController shooterController;
 
     [Header("Variables")]
     public int maxHealth = 100;
@@ -30,6 +31,8 @@ public class PlayerStats : MonoBehaviour
     
 
     public bool takingDamage = false;
+    public bool canShoot = true;
+    public bool shot = false;
     float attackSpeed = 1.5f;
     float attackTimer;
     float hungerRate = 3.5f;
@@ -43,6 +46,7 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         playerController = GetComponent<StarterAssets.ThirdPersonController>();
+        shooterController = GetComponent<ShooterController>();
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
         currentHunger = maxHunger;
@@ -57,7 +61,7 @@ public class PlayerStats : MonoBehaviour
     {
         if(playerController.isSprinting)
         {
-            if(currentStamina <= 0) playerController.isSprinting = false;
+            if(currentStamina <= 0) playerController.canSprint = false;
             GetTired(3);
         }
         else
@@ -74,16 +78,18 @@ public class PlayerStats : MonoBehaviour
         }
         hungerTimer += Time.deltaTime;
 
-        if (playerController.isShooting)
+        if (currentMana <= 0) canShoot = false;
+        else if (currentMana >= 25) canShoot = true;
+        if (shot)
         {
-            if (currentMana <= 0) playerController.isShooting = false;
             Shooting(5);
-        }
-        else
+            shot = false;
+        } else
         {
             if (currentMana >= maxMana) currentMana = maxMana;
             RechargeMana();
         }
+
 
         if(takingDamage)
         {

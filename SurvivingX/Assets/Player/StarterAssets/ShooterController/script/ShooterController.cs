@@ -18,25 +18,27 @@ public class ShooterController : MonoBehaviour
     [SerializeField]
     private Transform spawnBullet;
 
-    
     private float normalSensitivity;
     private float aimSensitivity;
 
     private StarterAssetsInputs starter;
     private ThirdPersonController third;
+    private PlayerStats playerStats;
 
-    bool canShoot = true;
+    public bool canShoot;
 
     private void Start()
     {
         normalSensitivity = StateController.gameSensitivity;
         aimSensitivity = StateController.aimSensitivity;
+        canShoot = true;
     }
 
     private void Awake()
     {
         starter = GetComponent<StarterAssetsInputs>();
         third = GetComponent<ThirdPersonController>();
+        playerStats = GetComponent<PlayerStats>();
     }
 
     private void Update()
@@ -50,7 +52,7 @@ public class ShooterController : MonoBehaviour
             mousePosition = rayHit.point;
         }
 
-
+        canShoot = playerStats.canShoot;
 
         if (starter.aim)
         {
@@ -69,11 +71,17 @@ public class ShooterController : MonoBehaviour
             third.changeRotation(true);
         }
 
-        if(starter.shoot)
+        Debug.Log(canShoot);
+        if (canShoot)
         {
-            Vector3 aimDirection = (mousePosition - spawnBullet.position).normalized;
-            Instantiate(bulletPrefab, spawnBullet.position, Quaternion.LookRotation(aimDirection, Vector3.up));
-            starter.shoot = false;
+            Debug.Log(starter.shoot);
+            if(starter.shoot)
+            {
+                Vector3 aimDirection = (mousePosition - spawnBullet.position).normalized;
+                Instantiate(bulletPrefab, spawnBullet.position, Quaternion.LookRotation(aimDirection, Vector3.up));
+                playerStats.shot = true;
+                starter.shoot = false;
+            }
         }
 
     }

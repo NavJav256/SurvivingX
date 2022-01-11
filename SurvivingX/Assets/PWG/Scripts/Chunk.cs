@@ -72,7 +72,7 @@ public class Chunk
 		spawner.prefab = enemies[0].prefab;
 		spawner.spawnAmount = 1;
 		spawner.spawnLimit = enemies[0].count;
-		spawner.rate = 10f;
+		spawner.rate = 3f;
 		spawner.spawnThreshold = 25f; //chunk limit 24.5
 
         //Add Vegetation

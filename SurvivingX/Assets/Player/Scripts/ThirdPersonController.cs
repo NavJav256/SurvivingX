@@ -99,8 +99,8 @@ namespace StarterAssets
 		public AudioSource runningSound;
 		private bool runSoundState = false;
 
+		public bool canSprint;
 		public bool isSprinting;
-		public bool isShooting;
 
 		private void Awake()
 		{
@@ -129,13 +129,13 @@ namespace StarterAssets
 		private void Update()
 		{
 			_hasAnimator = TryGetComponent(out _animator);
+			isSprinting = runSoundState;
+			if (canSprint) _input.sprint = true;
+			else _input.sprint = false;
 			
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
-			isSprinting = runSoundState;
-			if (Input.GetMouseButtonDown(0)) isShooting = true;
-			else isShooting = false;
 		}
 
 		private void LateUpdate()
