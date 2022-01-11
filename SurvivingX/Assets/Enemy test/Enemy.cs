@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour
         float distance = Vector3.Distance(target.position, transform.position);
 
         animator.SetLayerWeight(3, Mathf.Lerp(animator.GetLayerWeight(3), 0f, Time.deltaTime*10f));
+        animator.SetLayerWeight(4, Mathf.Lerp(animator.GetLayerWeight(4), 0f, Time.deltaTime * 10f));
         animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 1f, Time.deltaTime*10f));
 
         if (distance <= lookRadius)
@@ -116,6 +118,9 @@ public class Enemy : MonoBehaviour
         BulletProjectile bullet = collision.gameObject.GetComponent<BulletProjectile>();
         if (collision.gameObject.tag=="Bullet")
         {
+            agent.speed = 1f;
+            //animator.SetLayerWeight(4, Mathf.Lerp(animator.GetLayerWeight(4), 1f, Time.deltaTime * 10f));
+            //StartCoroutine(waiter());
             Debug.Log("Monster has been hit");
             health -= bullet.damage;
             // Enemy has died
@@ -129,6 +134,12 @@ public class Enemy : MonoBehaviour
     public float calculateHealth()
     {
         return health / maxHealth;
+    }
+
+    IEnumerator waiter()
+    {
+        yield return new WaitForSeconds(5);
+        Debug.Log("does this work?");
     }
 
 }
