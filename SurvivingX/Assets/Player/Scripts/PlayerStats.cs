@@ -18,6 +18,8 @@ public class PlayerStats : MonoBehaviour
     public int currentStamina;
     public int maxMana = 100;
     public int currentMana;
+    public int maxEXP = 100;
+    public int currentEXP;
     
     [Header("Bars")]
     [SerializeField]
@@ -28,11 +30,13 @@ public class PlayerStats : MonoBehaviour
     StaminaBar staminaBar;
     [SerializeField]
     ManaBar manaBar;
-    
+    [SerializeField]
+    ExpBar expBar;
 
     public bool takingDamage = false;
     public bool canShoot = true;
     public bool shot = false;
+    public bool gain = false;
     float attackSpeed = 1.5f;
     float attackTimer;
     float hungerRate = 3.5f;
@@ -55,6 +59,8 @@ public class PlayerStats : MonoBehaviour
         staminaBar.setMaxStamina(maxStamina);
         currentMana = maxMana;
         manaBar.setMaxMana(maxMana);
+        currentEXP = 0;
+        expBar.setMaxEXP(maxEXP);
     }
 
     private void Update()
@@ -84,13 +90,13 @@ public class PlayerStats : MonoBehaviour
         if (shot)
         {
             Shooting(5);
+            GainEXP(20);
             shot = false;
         } else
         {
             if (currentMana >= maxMana) currentMana = maxMana;
             RechargeMana();
         }
-
 
         if(takingDamage)
         {
@@ -102,6 +108,12 @@ public class PlayerStats : MonoBehaviour
             attackTimer += Time.deltaTime;
         }
         if (currentHealth <= 0) SceneManager.LoadScene("EndScreen");
+
+        if (gain)
+        {
+            
+            gain = false;
+        }
     }
 
     private void TakeDamage(int damage)
@@ -153,5 +165,17 @@ public class PlayerStats : MonoBehaviour
             manaTimer = 0;
         }
         manaTimer += Time.deltaTime;
+    }
+
+    private void GainEXP(int xp)
+    {
+        currentEXP += xp;
+        if (currentEXP >= maxEXP)
+        {
+            int remainder = currentEXP - maxEXP;
+            maxEXP *= 2;
+            expBar.setEXP(remainder);
+            expBar.setMaxEXP(maxEXP);
+        }
     }
 }

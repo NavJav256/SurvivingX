@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 962081136}
-  m_IndirectSpecularColor: {r: 0.36296725, g: 0.5661969, b: 0.8437109, a: 1}
+  m_IndirectSpecularColor: {r: 0.36297253, g: 0.5661971, b: 0.84371066, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3194,7 +3194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenuUI: {fileID: 1724294570}
-  HUD: {fileID: 0}
+  HUD: {fileID: 390183131}
 --- !u!114 &601815554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11227,13 +11227,17 @@ MonoBehaviour:
   currentStamina: 0
   maxMana: 100
   currentMana: 0
+  maxEXP: 100
+  currentEXP: 0
   healthBar: {fileID: 462901701}
   hungerBar: {fileID: 1998599472}
   staminaBar: {fileID: 1729218549}
   manaBar: {fileID: 1352629672}
+  expBar: {fileID: 0}
   takingDamage: 0
   canShoot: 1
   shot: 0
+  gain: 0
 --- !u!1 &4523139367347917011
 GameObject:
   m_ObjectHideFlags: 0
