@@ -9,9 +9,21 @@ public class JumpToTarget : MonoBehaviour
 
     public float time;
 
+    public Animator animator;
+    NavMeshAgent agent;
+
     private void Start()
     {
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        
+        agent = GetComponent<NavMeshAgent>();
+        
+    }
+
+    private void Update()
+    {
+        agent.speed = 2f;
         agent.destination = target.position;
+        animator.SetLayerWeight(3, Mathf.Lerp(animator.GetLayerWeight(3), 1f, Time.deltaTime * 10f));
     }
 }

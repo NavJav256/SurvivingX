@@ -39,6 +39,8 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
         gamePaused = false;
         HUD.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void Pause()
