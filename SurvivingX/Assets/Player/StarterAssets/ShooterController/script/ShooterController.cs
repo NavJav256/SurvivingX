@@ -71,10 +71,8 @@ public class ShooterController : MonoBehaviour
             third.changeRotation(true);
         }
 
-        Debug.Log(canShoot);
         if (canShoot)
         {
-            Debug.Log(starter.shoot);
             if(starter.shoot)
             {
                 Vector3 aimDirection = (mousePosition - spawnBullet.position).normalized;

@@ -94,7 +94,6 @@ public class PlayerStats : MonoBehaviour
 
         if(takingDamage)
         {
-            Debug.Log("dealing dmdage");
             if(attackTimer >= attackSpeed)
             {
                 TakeDamage(10);

@@ -62,18 +62,20 @@ public class Chunk
 
 		navMesh.BuildNavMesh();
 
+		System.Random rand = new System.Random();
+		int enemyIndex = rand.Next(enemies.Length);
 
 		sampleCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		sampleCube.AddComponent<Spawner>();
 		sampleCube.transform.position = new Vector3(0, -1, 0);
 		sampleCube.transform.parent = meshObject.transform;
-		var spawner = sampleCube.GetComponent<Spawner>();
-		spawner.player = viewer;
-		spawner.prefab = enemies[0].prefab;
-		spawner.spawnAmount = 1;
-		spawner.spawnLimit = enemies[0].count;
-		spawner.rate = 3f;
-		spawner.spawnThreshold = 25f; //chunk limit 24.5
+		var slimeSpawner = sampleCube.GetComponent<Spawner>();
+		slimeSpawner.player = viewer;
+		slimeSpawner.prefab = enemies[enemyIndex].prefab;
+		slimeSpawner.spawnAmount = 1;
+		slimeSpawner.spawnLimit = enemies[enemyIndex].count;
+		slimeSpawner.rate = 2f;
+		slimeSpawner.spawnThreshold = 25f; //chunk limit 24.5
 
         //Add Vegetation
         for (int i = 0; i < vegetation.Length; i++)
@@ -188,7 +190,7 @@ public class Chunk
 		float endHeight = textureData.layers[2].startHeight;
 		for (int i = 0; i < numberOfVegetation; i++)
 		{
-			var pos = new Vector3(Random.Range(-24.5f, 24.5f), Random.Range(startHeight, endHeight), Random.Range(-24.5f, 24.5f));
+			var pos = new Vector3(Random.Range(-24.5f, 24.5f), Random.Range(0.02f, 0.1f), Random.Range(-24.5f, 24.5f));
 			Object.Instantiate(prefab, pos, Quaternion.identity, parent);
 		}
 	}
@@ -220,7 +222,7 @@ class LODMesh
 
 	void OnMeshDataReceived(object meshDataObject) 
 	{
-		mesh = ((MeshData) meshDataObject).CreateMesh();
+		mesh = ((MeshData)meshDataObject).CreateMesh();
 		hasMesh = true;
 		updateCallback();
 	}

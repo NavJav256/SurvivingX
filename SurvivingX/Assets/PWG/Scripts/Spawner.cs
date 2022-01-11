@@ -37,12 +37,12 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
+        spawnTimer -= Time.deltaTime;
         float distance = Vector2.Distance(playerPosition, spawnerPosition);
         if (distance <= spawnThreshold)
         {
             if (transform.childCount < spawnLimit)
             {
-                spawnTimer -= Time.deltaTime;
                 if (spawnTimer <= 0f) Spawn();
             }
         }

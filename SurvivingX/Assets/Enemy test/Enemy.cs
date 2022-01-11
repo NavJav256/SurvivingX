@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         health = maxHealth;
         healthSlider.value = calculateHealth();
-        //playerStats = GetComponent<PlayerStats>();
+        //playerStats = FindObjectOfType<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -63,14 +63,14 @@ public class Enemy : MonoBehaviour
             // Deal damage to the player if within damage radius of 3
             if (distance <= damageRadius)
             {
-                //playerStats.takingDamage = true;
+                playerStats.takingDamage = true;
                 //Debug.Log("I am dealing damage");
                 animator.SetLayerWeight(3, Mathf.Lerp(animator.GetLayerWeight(3), 0f, Time.deltaTime * 10f));
                 animator.SetLayerWeight(2, Mathf.Lerp(animator.GetLayerWeight(2), 1f, Time.deltaTime * 10f));
             }
             else
             {
-                //playerStats.takingDamage = false;
+                playerStats.takingDamage = false;
                 animator.SetLayerWeight(2, Mathf.Lerp(animator.GetLayerWeight(2), 0f, Time.deltaTime * 10f));
             }
         }
