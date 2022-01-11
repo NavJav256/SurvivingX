@@ -68,6 +68,7 @@ public class PlayerStats : MonoBehaviour
         {
             if(currentStamina >= maxStamina) currentStamina = maxStamina;
             RechargeStamina();
+            playerController.canSprint = true;
         }
 
         if(hungerTimer >= hungerRate)

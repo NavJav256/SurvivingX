@@ -116,6 +116,7 @@ namespace StarterAssets
 			_hasAnimator = TryGetComponent(out _animator);
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
+			canSprint = true;
 
 			AssignAnimationIDs();
 
@@ -129,9 +130,6 @@ namespace StarterAssets
 		private void Update()
 		{
 			_hasAnimator = TryGetComponent(out _animator);
-			isSprinting = runSoundState;
-			if (canSprint) _input.sprint = true;
-			else _input.sprint = false;
 			
 			JumpAndGravity();
 			GroundedCheck();
@@ -193,8 +191,7 @@ namespace StarterAssets
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-
+			float targetSpeed = _input.sprint && canSprint ? SprintSpeed : MoveSpeed;
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
@@ -203,6 +200,7 @@ namespace StarterAssets
 			{
 				targetSpeed = 0.0f;
 				walkSoundState = false;
+				isSprinting = false;
 				walkingSound.Stop();
 				runningSound.Stop();
 			}
@@ -216,6 +214,7 @@ namespace StarterAssets
 					if (walkSoundState == false)
                     {
 						walkingSound.Play();
+						isSprinting = false;
 						walkSoundState = true;
 						runSoundState = false;
 					}
@@ -226,6 +225,7 @@ namespace StarterAssets
 					if (runSoundState == false)
                     {
 						runningSound.Play();
+						isSprinting = true;
 						runSoundState = true;
 						walkSoundState = false;
 					}
