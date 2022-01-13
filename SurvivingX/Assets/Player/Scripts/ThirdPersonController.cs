@@ -22,8 +22,10 @@ namespace StarterAssets
 		public float RotationSmoothTime = 0.12f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
-
 		public float Sensitivty = 1f;
+		public Interactable focus;
+		public ShooterController shooterController;
+		public Camera mainCamera;
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
@@ -131,6 +133,7 @@ namespace StarterAssets
 		{
 			_hasAnimator = TryGetComponent(out _animator);
 			
+			FocusInteractable();
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
@@ -150,6 +153,35 @@ namespace StarterAssets
 			_animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
 		}
 
+		private void FocusInteractable() 
+		{
+			shooterController.canShoot = false;
+			if (Input.GetKeyDown(KeyCode.E))
+			{
+				Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+				RaycastHit hit;
+
+				if (Physics.Raycast(ray, out hit, 100))
+				{
+					Interactable interactable = hit.collider.GetComponent<Interactable>();
+					if (interactable != null)
+					{
+						SetFocus(interactable);
+					}
+				}
+			}
+		}
+
+		void SetFocus(Interactable newFocus) 
+		{
+			focus = newFocus;
+		}
+
+		void RemoveFocus()
+		{
+			shooterController.canShoot = true;
+			focus = null;
+		}
 		private void GroundedCheck()
 		{
 			// set sphere position, with offset
@@ -190,6 +222,7 @@ namespace StarterAssets
 
 		private void Move()
 		{
+			RemoveFocus();
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint && canSprint ? SprintSpeed : MoveSpeed;
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
