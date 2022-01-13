@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestGiver : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    public Quest quest;
+    public PlayerStats player;
 
-    // Update is called once per frame
-    void Update()
+    public GameObject questWindow;
+    public Text titleText;
+    public Text descriptionText;
+    public Image reward;
+    public Text rewardAmount;
+
+    public void OpenQuestWindow()
     {
+        questWindow.SetActive(true);
+        titleText.text = quest.title;
+        descriptionText.text = quest.description;
+        reward.sprite = quest.rewardSprite;
+        rewardAmount.text = quest.rewardAmount.ToString();
         
     }
 }

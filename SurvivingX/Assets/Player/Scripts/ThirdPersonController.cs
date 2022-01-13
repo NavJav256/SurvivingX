@@ -118,6 +118,7 @@ namespace StarterAssets
 			_hasAnimator = TryGetComponent(out _animator);
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
+			shooterController = GetComponent<ShooterController>();
 			canSprint = true;
 
 			AssignAnimationIDs();
@@ -158,14 +159,16 @@ namespace StarterAssets
 			shooterController.canShoot = false;
 			if (Input.GetKeyDown(KeyCode.E))
 			{
-				Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 
 				if (Physics.Raycast(ray, out hit, 100))
 				{
+					
 					Interactable interactable = hit.collider.GetComponent<Interactable>();
 					if (interactable != null)
 					{
+						Debug.LogWarning("Is anything happening?");
 						SetFocus(interactable);
 					}
 				}
@@ -222,7 +225,7 @@ namespace StarterAssets
 
 		private void Move()
 		{
-			RemoveFocus();
+			//RemoveFocus();
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint && canSprint ? SprintSpeed : MoveSpeed;
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
