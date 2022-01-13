@@ -65,6 +65,10 @@ public class PlayerStats : MonoBehaviour
 
     private void Update()
     {
+        if (currentHealth <= 0)
+        {
+            SceneManager.LoadScene(2);
+        }
         if(playerController.isSprinting)
         {
             if(currentStamina <= 0) playerController.canSprint = false;
