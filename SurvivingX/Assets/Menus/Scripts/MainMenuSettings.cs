@@ -39,12 +39,21 @@ public class MainMenuSettings : MonoBehaviour
 
         List<string> resOptions = new List<string>();
 
+        int currentRes = 0;
+
         for(int i=0; i<screenResolutions.Length; i++)
         {
             resOptions.Add(screenResolutions[i].width + " x " + screenResolutions[i].height);
+
+            if(screenResolutions[i].width == Screen.currentResolution.width && screenResolutions[i].height == Screen.currentResolution.height)
+            {
+                currentRes = i;
+            }
         }
 
         resDropDown.AddOptions(resOptions);
+        resDropDown.value = currentRes;
+        resDropDown.RefreshShownValue();
     }
 
     public void changeVolume(float value)
@@ -117,7 +126,7 @@ public class MainMenuSettings : MonoBehaviour
 
     public void hardGame()
     {
-        StateController.enemyChaseSpeed = 4f;
+        StateController.enemyChaseSpeed = 9f;
         StateController.viewRadius = 15f;
         StateController.damageRadius = 4f;
         StateController.enemySpeed = 9f;
@@ -133,5 +142,11 @@ public class MainMenuSettings : MonoBehaviour
     public void setFullScreen(bool fullScreenSate)
     {
         Screen.fullScreen = fullScreenSate;
+    }
+
+    public void setScreenResolution(int resIndex)
+    {
+        Resolution res = screenResolutions[resIndex];
+        Screen.SetResolution(res.width, res.height, Screen.fullScreen);
     }
 }
