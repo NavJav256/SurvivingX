@@ -206,38 +206,31 @@ namespace StarterAssets
 			}
             else
             {
-				if (!Grounded)
-				{
-					walkingSound.Stop();
-					runningSound.Stop();
-				}
-                else
+				//Debug.Log(_speed);
+				if(_speed <= 5)
                 {
-					if (_speed <= 5)
-					{
-						runningSound.Stop();
-						if (walkSoundState == false)
-						{
-							walkingSound.Play();
-							isSprinting = false;
-							walkSoundState = true;
-							runSoundState = false;
-						}
+					Debug.Log("playing walk sound");
+					runningSound.Stop();
+					if (walkSoundState == false)
+                    {
+						walkingSound.Play();
+						isSprinting = false;
+						walkSoundState = true;
+						runSoundState = false;
 					}
-					else if (_speed >= 2.1)
-					{
-						walkingSound.Stop();
-						if (runSoundState == false)
-						{
-							runningSound.Play();
-							isSprinting = true;
-							runSoundState = true;
-							walkSoundState = false;
-						}
-
+                }
+				else if(_speed >= 2.1)
+                {
+					walkingSound.Pause();
+					if (runSoundState == false)
+                    {
+						runningSound.Play();
+						isSprinting = true;
+						runSoundState = true;
+						walkSoundState = false;
 					}
+					
 				}
-				
             }
 
 			// a reference to the players current horizontal velocity
