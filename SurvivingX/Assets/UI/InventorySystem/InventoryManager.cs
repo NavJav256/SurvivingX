@@ -4,7 +4,7 @@ using UnityEngine;
 using StarterAssets;
 using UnityEngine.SceneManagement;
 
-public class Inventory : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
     public static bool gamePaused = false;
 

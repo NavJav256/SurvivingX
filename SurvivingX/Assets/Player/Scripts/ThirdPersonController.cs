@@ -178,6 +178,7 @@ namespace StarterAssets
 		void SetFocus(Interactable newFocus) 
 		{
 			focus = newFocus;
+			newFocus.OnFocused(transform);
 		}
 
 		void RemoveFocus()
