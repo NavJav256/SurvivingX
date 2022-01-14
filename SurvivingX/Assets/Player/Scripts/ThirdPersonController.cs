@@ -14,9 +14,9 @@ namespace StarterAssets
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
-		public float MoveSpeed = 2.0f;
+		private float MoveSpeed = 2.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
-		public float SprintSpeed = 7f;
+		private float SprintSpeed = StateController.playerSpeed;
 		[Tooltip("How fast the character turns to face movement direction")]
 		[Range(0.0f, 0.3f)]
 		public float RotationSmoothTime = 0.12f;

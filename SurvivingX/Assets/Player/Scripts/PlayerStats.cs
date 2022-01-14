@@ -42,10 +42,10 @@ public class PlayerStats : MonoBehaviour
     float hungerRate = 3.5f;
     float hungerTimer;
     float staminaTiredRate = 0.5f;
-    float staminaRechargeRate = 0.2f;
+    float staminaRechargeRate = StateController.playerStaminaRegenRate;
     float staminaTimer;
     float manaTimer;
-    float manaRechargeRate = 0.3f;
+    float manaRechargeRate = StateController.playerHManaRegenRate;
 
     public List<Quest> quests;
     public List<Quest> completed;

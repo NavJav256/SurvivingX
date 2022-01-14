@@ -13,9 +13,15 @@ public class PauseManager : MonoBehaviour
 
     //public StarterAssetsInputs starter;
 
+    private void Start()
+    {
+        
+    }
+
     private void Awake()
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -55,6 +61,8 @@ public class PauseManager : MonoBehaviour
 
     public void returnToMain()
     {
+        Time.timeScale = 1f;
+        gamePaused = false;
         SceneManager.LoadScene(0);
     }
 

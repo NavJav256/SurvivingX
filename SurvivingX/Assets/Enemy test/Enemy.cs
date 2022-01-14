@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Slider healthSlider;
 
-    private float damage = StateController.damage;
+    private float damage = StateController.enemyDamage;
     private NavMeshAgent agent;
     private float moveTimer;
     private float changeDirectionTimeLimit = 5f;
@@ -24,15 +24,14 @@ public class Enemy : MonoBehaviour
     public PlayerStats playerStats;
 
 
-    float health = 25f;
-    float maxHealth = 35f;
+    float health = StateController.enemyHealth;
+    float maxHealth = StateController.enemyHealth;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         changeWanderingDirection();
         animator = GetComponent<Animator>();
-        health = maxHealth;
         healthSlider.value = calculateHealth();
         //playerStats = FindObjectOfType<PlayerStats>();
     }

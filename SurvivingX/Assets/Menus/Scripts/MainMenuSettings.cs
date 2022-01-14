@@ -30,8 +30,6 @@ public class MainMenuSettings : MonoBehaviour
     [SerializeField]
     private Slider playerDamage;
     [SerializeField]
-    private Slider playerHealthRegen;
-    [SerializeField]
     private Slider playerSprintRegen;
     [SerializeField]
     private Slider playerManaRegen;
@@ -54,6 +52,7 @@ public class MainMenuSettings : MonoBehaviour
         StateController.aimSensitivity = 0.5f;
         StateController.invertYAxis = false;
         AudioListener.volume = 1f;
+        breakItInitialValues();
 
         screenResolutions = Screen.resolutions;
 
@@ -132,7 +131,16 @@ public class MainMenuSettings : MonoBehaviour
         StateController.viewRadius = 5f;
         StateController.damageRadius = 2f;
         StateController.enemySpeed = 4f;
-        StateController.damage = 3;
+        StateController.enemyDamage = 3;
+
+        StateController.playerHealth = 200;
+        StateController.playerHManaRegenRate = 0.2f;
+        StateController.playerStaminaRegenRate = 0.2f;
+        StateController.enemySpawnRate = 10f;
+        StateController.enemyHealth = 20f;
+        StateController.playerSpeed = 7f;
+        StateController.playerDamage = 3f;
+
         loadGame();
     }
 
@@ -142,7 +150,16 @@ public class MainMenuSettings : MonoBehaviour
         StateController.viewRadius = 5f;
         StateController.damageRadius = 3f;
         StateController.enemySpeed = 6f;
-        StateController.damage = 5;
+        StateController.enemyDamage = 5;
+
+        StateController.playerHealth = 150;
+        StateController.playerHManaRegenRate = 0.4f;
+        StateController.playerStaminaRegenRate = 0.4f;
+        StateController.enemySpawnRate = 5f;
+        StateController.enemyHealth = 30f;
+        StateController.playerSpeed = 10f;
+        StateController.playerDamage = 5f;
+
         loadGame();
     }
 
@@ -152,7 +169,16 @@ public class MainMenuSettings : MonoBehaviour
         StateController.viewRadius = 15f;
         StateController.damageRadius = 4f;
         StateController.enemySpeed = 9f;
-        StateController.damage = 7;
+        StateController.enemyDamage = 7;
+
+        StateController.playerHealth = 100;
+        StateController.playerHManaRegenRate = 0.6f;
+        StateController.playerStaminaRegenRate = 0.6f;
+        StateController.enemySpawnRate = 1f;
+        StateController.enemyHealth = 40f;
+        StateController.playerSpeed = 15f;
+        StateController.playerDamage = 7f;
+
         loadGame();
     }
 
@@ -176,7 +202,35 @@ public class MainMenuSettings : MonoBehaviour
 
     public void breakItInitialValues()
     {
+        StateController.enemyChaseSpeed = 5f;
+        enemySpeed.value = 5f;
 
+        StateController.viewRadius = 15f;
+        StateController.damageRadius = 5f;
+
+        StateController.enemySpeed = 4f;
+        enemySpeed.value = 4f;
+
+        StateController.enemyDamage = 3;
+        enemyDamage.value = 3;
+
+        StateController.playerHealth = 200;
+        playerHealth.value = 200;
+
+        StateController.playerHManaRegenRate = 0.2f;
+        playerManaRegen.value = 0.2f;
+
+        StateController.playerStaminaRegenRate = 0.2f;
+        playerSprintRegen.value = 0.2f;
+
+        StateController.enemySpawnRate = 10f;
+        enemySpawnRate.value = 10f;
+
+        StateController.enemyHealth = 40f;
+        enemyHealth.value = 40;
+
+        StateController.playerSpeed = 7f;
+        playerSpeed.value = 7f;
     }
 
     public void setPlayerHealth(float health)
@@ -186,12 +240,13 @@ public class MainMenuSettings : MonoBehaviour
 
     public void setPlayerSpeed(float speed)
     {
-        StateController.playerSpeed = (int)speed;
+        Debug.Log(speed);
+        StateController.playerSpeed = speed;
     }
 
     public void setPlayerDamage(float damage)
     {
-        StateController.playerDamage = (int)damage;
+        StateController.playerDamage = damage;
     }
 
     public void setPlayerHealthRegen(float rate)
@@ -216,12 +271,13 @@ public class MainMenuSettings : MonoBehaviour
 
     public void setEnemySpeed(float speed)
     {
-        StateController.enemySpeed = speed;
+        StateController.enemyChaseSpeed = speed;
+        Debug.Log(speed);
     }
 
     public void setEnemyDamage(float damage)
     {
-        StateController.enemyDamage = (int)damage;
+        StateController.enemyDamage = damage;
     }
 
     public void setSpawnRate(float rate)

@@ -74,7 +74,7 @@ public class Chunk
 		slimeSpawner.prefab = enemies[enemyIndex].prefab;
 		slimeSpawner.spawnAmount = 1;
 		slimeSpawner.spawnLimit = enemies[enemyIndex].count;
-		slimeSpawner.rate = 2f;
+		slimeSpawner.rate = StateController.enemySpawnRate;
 		slimeSpawner.spawnThreshold = 25f; //chunk limit 24.5
 
         //Add Vegetation
