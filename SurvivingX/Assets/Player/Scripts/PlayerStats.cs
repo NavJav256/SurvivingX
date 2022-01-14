@@ -47,6 +47,9 @@ public class PlayerStats : MonoBehaviour
     float manaTimer;
     float manaRechargeRate = 0.3f;
 
+    public List<Quest> quests;
+    public List<Quest> completed;
+
     private void Start()
     {
         playerController = GetComponent<StarterAssets.ThirdPersonController>();

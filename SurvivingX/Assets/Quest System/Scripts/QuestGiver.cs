@@ -21,7 +21,13 @@ public class QuestGiver : MonoBehaviour
         titleText.text = quest.title;
         descriptionText.text = quest.description;
         reward.sprite = quest.rewardSprite;
-        rewardAmount.text = quest.rewardAmount.ToString();
-        
+        rewardAmount.text = "x" + quest.rewardAmount.ToString();
+    }
+
+    public void AcceptQuest()
+    {
+        questWindow.SetActive(false);
+        quest.isActive = true;
+        player.quests.Add(quest);
     }
 }

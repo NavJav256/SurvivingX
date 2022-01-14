@@ -12,4 +12,11 @@ public class Quest
     public GameObject reward;
     public Sprite rewardSprite;
     public int rewardAmount;
+
+    public QuestGoal goal;
+
+    public void Complete()
+    {
+        isActive = false;
+    }
 }
