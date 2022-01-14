@@ -25,5 +25,5 @@ public class StateController : MonoBehaviour
     public static float playerHManaRegenRate;
     public static float enemyHealth;
     public static int enemyDamage;
-    public static flaot enemySpawnRate;
+    public static float enemySpawnRate;
 }
