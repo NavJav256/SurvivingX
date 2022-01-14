@@ -97,7 +97,6 @@ public class PlayerStats : MonoBehaviour
         if (shot)
         {
             Shooting(5);
-            GainEXP(20);
             shot = false;
         } else
         {
@@ -174,15 +173,4 @@ public class PlayerStats : MonoBehaviour
         manaTimer += Time.deltaTime;
     }
 
-    private void GainEXP(int xp)
-    {
-        currentEXP += xp;
-        if (currentEXP >= maxEXP)
-        {
-            int remainder = currentEXP - maxEXP;
-            maxEXP *= 2;
-            expBar.setEXP(remainder);
-            expBar.setMaxEXP(maxEXP);
-        }
-    }
 }
