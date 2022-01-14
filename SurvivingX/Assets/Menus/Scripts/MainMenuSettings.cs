@@ -22,6 +22,28 @@ public class MainMenuSettings : MonoBehaviour
     [SerializeField]
     private Dropdown resDropDown;
 
+    [Header("Break it")]
+    [SerializeField]
+    private Slider playerHealth;
+    [SerializeField]
+    private Slider playerSpeed;
+    [SerializeField]
+    private Slider playerDamage;
+    [SerializeField]
+    private Slider playerHealthRegen;
+    [SerializeField]
+    private Slider playerSprintRegen;
+    [SerializeField]
+    private Slider playerManaRegen;
+    [SerializeField]
+    private Slider enemyHealth;
+    [SerializeField]
+    private Slider enemyDamage;
+    [SerializeField]
+    private Slider enemySpawnRate;
+    [SerializeField]
+    private Slider enemySpeed;
+
     private bool yAxisState = false;
 
     Resolution[] screenResolutions;
@@ -148,5 +170,62 @@ public class MainMenuSettings : MonoBehaviour
     {
         Resolution res = screenResolutions[resIndex];
         Screen.SetResolution(res.width, res.height, Screen.fullScreen);
+    }
+
+    //Break it methods...
+
+    public void breakItInitialValues()
+    {
+
+    }
+
+    public void setPlayerHealth(float health)
+    {
+        StateController.playerHealth = (int)health;
+    }
+
+    public void setPlayerSpeed(float speed)
+    {
+        StateController.playerSpeed = (int)speed;
+    }
+
+    public void setPlayerDamage(float damage)
+    {
+        StateController.playerDamage = (int)damage;
+    }
+
+    public void setPlayerHealthRegen(float rate)
+    {
+        StateController.playerHealthRegenRate = rate;
+    }
+
+    public void setStaminaRegenRate(float rate)
+    {
+        StateController.playerStaminaRegenRate = rate;
+    }
+
+    public void setManaRegen(float rate)
+    {
+        StateController.playerHManaRegenRate = rate;
+    }
+
+    public void setEnemyHealth(float health)
+    {
+        StateController.enemyHealth = health;
+    }
+
+    public void setEnemySpeed(float speed)
+    {
+        StateController.enemySpeed = speed;
+    }
+
+    public void setEnemyDamage(float damage)
+    {
+        StateController.enemyDamage = (int)damage;
+    }
+
+    public void setSpawnRate(float rate)
+    {
+        StateController.enemySpawnRate = rate;
     }
 }
