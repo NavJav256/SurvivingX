@@ -15,7 +15,8 @@ public class PauseManager : MonoBehaviour
 
     private void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Awake()
@@ -28,6 +29,7 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
+            Debug.Log("Test");
             if (gamePaused)
             {
                 Resume();
