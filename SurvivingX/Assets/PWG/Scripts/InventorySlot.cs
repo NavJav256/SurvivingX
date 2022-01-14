@@ -7,6 +7,7 @@ public class InventorySlot : MonoBehaviour
     public Button removeButton;
 
     Item item;
+    public PlayerStats playerStats;
 
     public void AddItem(Item newItem)
     {
@@ -37,7 +38,10 @@ public class InventorySlot : MonoBehaviour
     {
         if (item != null)
         {
-            item.Use();
+            // item.Use();
+            Inventory.instance.Remove(item);
+            playerStats.currentHealth += 5;
+            playerStats.currentHunger += 10;
         }
     }
 }

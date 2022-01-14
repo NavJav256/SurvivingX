@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
 
 
     public PlayerStats playerStats;
+    public GameObject drop;
 
 
     float health = StateController.enemyHealth;
@@ -126,6 +127,7 @@ public class Enemy : MonoBehaviour
             if (health <= 0)
             {
                 Destroy(gameObject);
+                Instantiate(drop, transform.position, transform.rotation);
             }
         }
     }

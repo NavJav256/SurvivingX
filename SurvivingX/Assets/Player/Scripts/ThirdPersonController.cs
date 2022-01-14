@@ -135,6 +135,7 @@ namespace StarterAssets
 			_hasAnimator = TryGetComponent(out _animator);
 			
 			FocusInteractable();
+			NPCInteract();
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
@@ -170,6 +171,25 @@ namespace StarterAssets
 					{
 						Debug.LogWarning("Is anything happening?");
 						SetFocus(interactable);
+					}
+				}
+			}
+		}
+
+		void NPCInteract() 
+		{
+			if (Input.GetKeyDown(KeyCode.F))
+			{
+				RaycastHit hit;
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+				if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+				{
+					NPCController npcController = hit.transform.GetComponent<NPCController>();
+					if(npcController != null){
+						npcController.ShowDialogue();
+						npcController.dialogueIndex++;
+						return;
 					}
 				}
 			}
