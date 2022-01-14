@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Banana
   m_EditorClassIdentifier: 
   name: Banana
-  icon: {fileID: 21300000, guid: 11307850017b2334892e941060f1bc8e, type: 3}
+  icon: {fileID: 21300000, guid: e0f9954cbd3aa9448bac707d0cbcfd08, type: 3}
   isDefaultItem: 0
+  healthRecovery: 7
+  hungerRecovery: 7

@@ -8,10 +8,11 @@ public class Item : ScriptableObject
     public bool isDefaultItem = false;
     public int healthRecovery;
     public int hungerRecovery;
-
+    
     public virtual void Use ()
     {
         Debug.Log("Using" + name);
+
     }
 
 }

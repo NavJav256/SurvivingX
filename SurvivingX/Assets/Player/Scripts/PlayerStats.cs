@@ -63,7 +63,7 @@ public class PlayerStats : MonoBehaviour
         currentMana = maxMana;
         manaBar.setMaxMana(maxMana);
         currentEXP = 0;
-        expBar.setMaxEXP(maxEXP);
+        //expBar.setMaxEXP(maxEXP);
     }
 
     private void Update()

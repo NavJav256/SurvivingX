@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db9d37cb95d10e45901b07008bfe96b, type: 3}
   m_Name: Cherry
   m_EditorClassIdentifier: 
-  name: Placeholder Health Potion
-  icon: {fileID: 21300000, guid: 11307850017b2334892e941060f1bc8e, type: 3}
+  name: Cherry
+  icon: {fileID: 21300000, guid: 6ce2a8c88ce3b9d4baccf1d45c493e03, type: 3}
   isDefaultItem: 0
+  healthRecovery: 15
+  hungerRecovery: 15
